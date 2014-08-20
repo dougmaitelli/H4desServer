@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Release" />
+	<File name="H4des Emulator.rc" open="0" top="0" tabpos="3">
+		<Cursor position="42" topLine="0" />
+	</File>
+	<File name="comum\log.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="2007" topLine="68" />
+	</File>
+	<File name="comum\log.h" open="0" top="0" tabpos="2">
+		<Cursor position="575" topLine="17" />
+	</File>
+	<File name="version.h" open="0" top="0" tabpos="0">
+		<Cursor position="562" topLine="5" />
+	</File>
+	<File name="worldserver\db.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="159" topLine="0" />
+	</File>
+	<File name="worldserver\extras.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="worldserver\gmcmd.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="643" topLine="0" />
+	</File>
+	<File name="worldserver\main.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="260" topLine="6" />
+	</File>
+	<File name="worldserver\message.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="539" topLine="10" />
+	</File>
+	<File name="worldserver\pacotes.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="62" topLine="0" />
+	</File>
+	<File name="worldserver\server.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="4098" topLine="100" />
+	</File>
+	<File name="worldserver\worldserver.cpp" open="1" top="0" tabpos="6">
+		<Cursor position="1099" topLine="7" />
+	</File>
+	<File name="worldserver\worldserver.h" open="0" top="0" tabpos="4">
+		<Cursor position="993" topLine="15" />
+	</File>
+</CodeBlocks_layout_file>

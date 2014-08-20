@@ -1,0 +1,3 @@
+[4/1/2010 4:50:23][ERRO SQL]: Erro na sintaxe da query MYSQL! Lost connection to MySQL server during query
+[4/1/2010 4:50:23][ERRO SQL]: Erro na sintaxe da query MYSQL! MySQL server has gone away
+[2/2/2010 21:41:34][ERRO SQL]: Erro na sintaxe da query MYSQL! A table must have at least 1 column

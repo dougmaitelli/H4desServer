@@ -1,0 +1,43 @@
+/lvl numero
+/exp numero
+/gold numero
+/item item
+/ban player
+/unban player
+/kick player
+/warn player numero
+/go mapa x y
+/buff
+/buy
+/restart_server
+/reload_item
+/reload_npc
+/reload_monster
+/reload_quest
+/reload_skill
+/reload_guild
+/tempo clima
+/repair
+/summon monstro
+/clear_map
+/call player
+/heal
+/hide
+/max_stat
+/max_hab
+/who player
+/guild_lvl numero
+/msg menssagem
+/save
+#lvl player numero
+#exp player numero
+#gold player numero
+#item player item
+#go player mapa x y
+#buff player
+#repair player
+#heal player
+#max_stat player
+#max_hab player
+#guild_lvl player numero
+#save player

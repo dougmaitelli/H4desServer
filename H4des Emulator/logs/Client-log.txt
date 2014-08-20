@@ -1,0 +1,295 @@
+[2/12/2009 12:10:48][CLIENTE]: [368]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/12/2009 12:10:51][CLIENTE]: [368]Cliente logou como 1: dougmaitelli!
+[2/12/2009 12:11:7][CLIENTE]: [524]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/12/2009 12:11:9][CLIENTE]: [524]Cliente logou como 3: teste!
+[2/12/2009 12:12:38][CLIENTE]: [368]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/12/2009 12:12:38][CLIENTE]: [368]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/12/2009 12:12:38][CLIENTE]: [524]Cliente 3: teste deslogou-se e foi desconectado!
+[2/12/2009 12:12:38][CLIENTE]: [524]Cliente 3: teste deslogou-se e foi desconectado!
+[2/12/2009 16:37:12][CLIENTE]: [368]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/12/2009 16:37:16][CLIENTE]: [412]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/12/2009 16:37:22][CLIENTE]: [412]Cliente logou como 1: dougmaitelli!
+[2/12/2009 16:37:26][CLIENTE]: [368]Cliente logou como 3: teste!
+[2/12/2009 16:38:17][CLIENTE]: [368]Cliente 3: teste deslogou-se e foi desconectado!
+[2/12/2009 16:38:25][CLIENTE]: [412]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/12/2009 16:38:39][CLIENTE]: [428]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/12/2009 16:38:42][CLIENTE]: [428]Cliente logou como 1: dougmaitelli!
+[2/12/2009 16:38:46][CLIENTE]: [428]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/12/2009 16:38:51][CLIENTE]: [396]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/12/2009 16:38:54][CLIENTE]: [396]Cliente logou como 1: dougmaitelli!
+[2/12/2009 16:39:1][CLIENTE]: [448]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/12/2009 16:39:3][CLIENTE]: [448]Cliente logou como 3: teste!
+[2/12/2009 16:39:32][CLIENTE]: [468]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/12/2009 16:39:40][CLIENTE]: [468]Cliente logou como 2: pikachu!
+[2/12/2009 16:40:12][CLIENTE]: [396]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/12/2009 16:40:14][CLIENTE]: [468]Cliente 2: pikachu deslogou-se e foi desconectado!
+[2/12/2009 16:40:15][CLIENTE]: [448]Cliente 3: teste deslogou-se e foi desconectado!
+[2/12/2009 18:23:14][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/12/2009 18:23:19][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[2/12/2009 18:23:38][CLIENTE]: [420]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/12/2009 18:23:41][CLIENTE]: [420]Cliente logou como 3: teste!
+[29/12/2009 0:26:53][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[29/12/2009 0:27:0][CLIENTE]: [392]Cliente foi desconectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 0:41:11][CLIENTE]: [512]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 0:41:11][CLIENTE]: [512]Cliente logou como 1: dougmaitelli!
+[2/1/2010 0:41:19][CLIENTE]: [540]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 0:41:19][CLIENTE]: [540]Cliente foi desconectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 0:41:28][CLIENTE]: [556]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 0:41:28][CLIENTE]: [556]Cliente foi desconectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 0:41:30][CLIENTE]: [512]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 1:7:54][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 1:7:55][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[2/1/2010 1:7:58][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 1:36:10][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 1:36:10][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[2/1/2010 1:36:35][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 1:37:30][CLIENTE]: [368]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 1:37:30][CLIENTE]: [368]Cliente logou como 1: dougmaitelli!
+[2/1/2010 1:38:2][CLIENTE]: [368]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 1:38:13][CLIENTE]: [408]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 1:38:18][CLIENTE]: [408]Cliente logou como 1: dougmaitelli!
+[2/1/2010 1:38:25][CLIENTE]: [408]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 1:39:18][CLIENTE]: [416]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 1:39:19][CLIENTE]: [416]Cliente logou como 1: dougmaitelli!
+[2/1/2010 1:39:33][CLIENTE]: [416]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 1:40:35][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 1:40:35][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[2/1/2010 1:40:44][CLIENTE]: [412]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 1:40:47][CLIENTE]: [412]Cliente logou como 3: teste!
+[2/1/2010 1:40:56][CLIENTE]: [412]Cliente 3: teste deslogou-se e foi desconectado!
+[2/1/2010 1:41:0][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 2:11:14][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 2:11:14][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[2/1/2010 2:11:32][CLIENTE]: [412]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 2:11:36][CLIENTE]: [412]Cliente logou como 3: teste!
+[2/1/2010 2:12:18][CLIENTE]: [412]Cliente 3: teste deslogou-se e foi desconectado!
+[2/1/2010 2:12:23][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 2:14:27][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 2:14:27][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[2/1/2010 2:15:16][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 2:15:16][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[2/1/2010 2:15:35][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 2:16:13][CLIENTE]: [368]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 2:16:13][CLIENTE]: [368]Cliente logou como 1: dougmaitelli!
+[2/1/2010 2:16:19][CLIENTE]: [368]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 2:16:52][CLIENTE]: [408]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 2:16:52][CLIENTE]: [408]Cliente logou como 1: dougmaitelli!
+[2/1/2010 2:17:4][CLIENTE]: [408]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 2:23:58][CLIENTE]: [212]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 2:23:58][CLIENTE]: [212]Cliente logou como 1: dougmaitelli!
+[2/1/2010 2:24:22][CLIENTE]: [448]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 2:24:24][CLIENTE]: [448]Cliente logou como 3: teste!
+[2/1/2010 2:24:53][CLIENTE]: [448]Cliente 3: teste deslogou-se e foi desconectado!
+[2/1/2010 2:25:2][CLIENTE]: [212]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 2:27:21][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 2:27:21][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[2/1/2010 2:27:54][CLIENTE]: [420]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 2:28:23][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 2:28:26][CLIENTE]: [392]Cliente logou como 3: teste!
+[2/1/2010 2:28:33][CLIENTE]: [412]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 2:28:33][CLIENTE]: [412]Cliente logou como 1: dougmaitelli!
+[2/1/2010 2:32:23][CLIENTE]: [412]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 2:32:35][CLIENTE]: [428]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 2:32:35][CLIENTE]: [428]Cliente logou como 1: dougmaitelli!
+[2/1/2010 2:32:45][CLIENTE]: [428]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 2:32:46][CLIENTE]: [392]Cliente 3: teste deslogou-se e foi desconectado!
+[2/1/2010 2:37:55][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 2:37:56][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[2/1/2010 2:38:24][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 2:39:9][CLIENTE]: [212]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 2:39:10][CLIENTE]: [212]Cliente logou como 1: dougmaitelli!
+[2/1/2010 2:39:30][CLIENTE]: [212]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 15:40:54][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 15:40:54][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[2/1/2010 15:41:14][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 15:42:42][CLIENTE]: [412]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 15:42:42][CLIENTE]: [412]Cliente logou como 1: dougmaitelli!
+[2/1/2010 15:42:59][CLIENTE]: [412]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 15:46:40][CLIENTE]: [384]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 15:46:47][CLIENTE]: [384]Cliente logou como 1: dougmaitelli!
+[2/1/2010 15:48:18][CLIENTE]: [384]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 16:44:10][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 16:44:10][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[2/1/2010 16:44:16][CLIENTE]: [412]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 16:44:17][CLIENTE]: [412]Cliente logou como 3: teste!
+[2/1/2010 16:50:31][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 16:50:33][CLIENTE]: [412]Cliente 3: teste deslogou-se e foi desconectado!
+[2/1/2010 17:6:37][CLIENTE]: [428]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 17:6:37][CLIENTE]: [428]Cliente logou como 1: dougmaitelli!
+[2/1/2010 17:8:9][CLIENTE]: [428]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 17:8:14][CLIENTE]: [368]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 17:8:15][CLIENTE]: [368]Cliente logou como 1: dougmaitelli!
+[2/1/2010 17:8:27][CLIENTE]: [368]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 17:29:4][CLIENTE]: [448]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 17:29:4][CLIENTE]: [448]Cliente logou como 1: dougmaitelli!
+[2/1/2010 17:29:41][CLIENTE]: [448]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 18:0:36][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 18:0:36][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[2/1/2010 18:4:45][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 18:4:45][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[2/1/2010 18:5:20][CLIENTE]: [212]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 18:5:23][CLIENTE]: [212]Cliente logou como 3: teste!
+[2/1/2010 18:5:29][CLIENTE]: [212]Cliente 3: teste deslogou-se e foi desconectado!
+[2/1/2010 18:5:30][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 18:5:35][CLIENTE]: [408]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 18:5:40][CLIENTE]: [408]Cliente logou como 1: dougmaitelli!
+[2/1/2010 18:5:48][CLIENTE]: [408]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 18:5:51][CLIENTE]: [436]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 18:5:55][CLIENTE]: [436]Cliente logou como 1: dougmaitelli!
+[2/1/2010 18:6:7][CLIENTE]: [436]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[2/1/2010 18:7:13][CLIENTE]: [416]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 18:7:13][CLIENTE]: [416]Cliente logou como 3: teste!
+[2/1/2010 18:7:19][CLIENTE]: [468]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 18:7:19][CLIENTE]: [468]Cliente logou como 1: dougmaitelli!
+[2/1/2010 18:17:34][CLIENTE]: [400]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 18:17:34][CLIENTE]: [412]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 18:17:34][CLIENTE]: [412]Cliente foi desconectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 18:17:34][CLIENTE]: [400]Cliente foi desconectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 18:19:43][CLIENTE]: [436]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[2/1/2010 18:19:44][CLIENTE]: [436]Cliente logou como 1: dougmaitelli!
+[2/1/2010 18:25:35][CLIENTE]: [436]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[3/1/2010 0:20:56][CLIENTE]: [512]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[3/1/2010 0:20:56][CLIENTE]: [512]Cliente logou como 1: dougmaitelli!
+[3/1/2010 0:21:23][CLIENTE]: [512]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[3/1/2010 0:27:7][CLIENTE]: [212]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[3/1/2010 0:27:7][CLIENTE]: [212]Cliente logou como 1: dougmaitelli!
+[3/1/2010 0:27:23][CLIENTE]: [212]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[4/1/2010 0:58:53][CLIENTE]: [212]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 0:58:53][CLIENTE]: [212]Cliente foi desconectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 0:59:20][CLIENTE]: [368]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 0:59:20][CLIENTE]: [368]Cliente foi desconectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 0:59:42][CLIENTE]: [428]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 0:59:42][CLIENTE]: [428]Cliente logou como 1: dougmaitelli!
+[4/1/2010 1:1:41][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 1:1:41][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[4/1/2010 4:18:35][CLIENTE]: [520]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 4:18:35][CLIENTE]: [520]Cliente foi desconectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 4:19:6][CLIENTE]: [212]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 4:19:6][CLIENTE]: [212]Cliente logou como 1: dougmaitelli!
+[4/1/2010 4:19:29][CLIENTE]: [212]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[4/1/2010 4:34:15][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 4:34:15][CLIENTE]: [392]Cliente logou como 3: teste!
+[4/1/2010 4:34:33][CLIENTE]: [212]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 4:34:33][CLIENTE]: [212]Cliente logou como 1: dougmaitelli!
+[4/1/2010 4:35:3][CLIENTE]: [212]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[4/1/2010 4:35:5][CLIENTE]: [392]Cliente 3: teste deslogou-se e foi desconectado!
+[4/1/2010 4:35:24][CLIENTE]: [408]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 4:35:25][CLIENTE]: [408]Cliente logou como 3: teste!
+[4/1/2010 4:35:36][CLIENTE]: [448]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 4:35:37][CLIENTE]: [448]Cliente logou como 1: dougmaitelli!
+[4/1/2010 4:35:53][CLIENTE]: [448]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[4/1/2010 4:35:54][CLIENTE]: [408]Cliente 3: teste deslogou-se e foi desconectado!
+[4/1/2010 4:36:15][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 4:36:15][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[4/1/2010 4:36:20][CLIENTE]: [412]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 4:36:38][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 4:36:39][CLIENTE]: [392]Cliente logou como 3: teste!
+[4/1/2010 4:36:49][CLIENTE]: [412]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 4:36:50][CLIENTE]: [412]Cliente logou como 1: dougmaitelli!
+[4/1/2010 4:37:5][CLIENTE]: [412]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[4/1/2010 4:37:7][CLIENTE]: [392]Cliente 3: teste deslogou-se e foi desconectado!
+[4/1/2010 4:37:29][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 4:37:30][CLIENTE]: [392]Cliente logou como 3: teste!
+[4/1/2010 4:37:40][CLIENTE]: [412]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 4:37:40][CLIENTE]: [412]Cliente foi desconectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 4:38:15][CLIENTE]: [212]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 4:38:15][CLIENTE]: [212]Cliente logou como 1: dougmaitelli!
+[4/1/2010 4:39:10][CLIENTE]: [392]Cliente 3: teste deslogou-se e foi desconectado!
+[4/1/2010 4:39:10][CLIENTE]: [392]Cliente 3: teste deslogou-se e foi desconectado!
+[4/1/2010 4:39:10][CLIENTE]: [212]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[4/1/2010 4:39:11][CLIENTE]: [212]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[4/1/2010 4:46:40][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 4:46:40][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[4/1/2010 4:46:53][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[4/1/2010 4:46:53][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[4/1/2010 4:48:42][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 4:48:42][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[4/1/2010 4:48:48][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[4/1/2010 4:48:48][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[4/1/2010 4:50:0][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 4:50:0][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[4/1/2010 4:50:23][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[4/1/2010 4:50:23][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[4/1/2010 17:51:54][CLIENTE]: [400]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 17:51:59][CLIENTE]: [400]Cliente logou como 1: dougmaitelli!
+[4/1/2010 17:52:28][CLIENTE]: [212]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 17:52:31][CLIENTE]: [212]Cliente foi desconectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 17:52:51][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 17:53:0][CLIENTE]: [392]Cliente foi desconectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 17:53:16][CLIENTE]: [420]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 17:53:20][CLIENTE]: [420]Cliente foi desconectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 17:53:33][CLIENTE]: [400]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[4/1/2010 17:57:14][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 17:57:18][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[4/1/2010 17:57:27][CLIENTE]: [412]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 17:57:31][CLIENTE]: [412]Cliente foi desconectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 17:57:55][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[4/1/2010 17:57:55][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[4/1/2010 18:0:51][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 18:0:54][CLIENTE]: [392]Cliente logou como 3: teste!
+[4/1/2010 18:1:5][CLIENTE]: [412]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 18:1:10][CLIENTE]: [412]Cliente logou como 1: dougmaitelli!
+[4/1/2010 18:2:3][CLIENTE]: [392]Cliente 3: teste deslogou-se e foi desconectado!
+[4/1/2010 18:2:3][CLIENTE]: [392]Cliente 3: teste deslogou-se e foi desconectado!
+[4/1/2010 18:2:25][CLIENTE]: [432]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 18:2:28][CLIENTE]: [432]Cliente foi desconectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 18:2:52][CLIENTE]: [212]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 18:2:55][CLIENTE]: [212]Cliente logou como 3: teste!
+[4/1/2010 18:3:9][CLIENTE]: [212]Cliente 3: teste deslogou-se e foi desconectado!
+[4/1/2010 18:4:12][CLIENTE]: [412]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[4/1/2010 18:6:37][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 18:6:43][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[4/1/2010 18:6:47][CLIENTE]: [412]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[4/1/2010 18:6:50][CLIENTE]: [412]Cliente logou como 3: teste!
+[4/1/2010 18:6:56][CLIENTE]: [412]Cliente 3: teste deslogou-se e foi desconectado!
+[5/1/2010 0:9:54][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[5/1/2010 0:9:54][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[5/1/2010 0:9:56][CLIENTE]: [412]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[5/1/2010 0:9:56][CLIENTE]: [412]Cliente foi desconectado em 127.0.0.1 subnet: 127.0.0!
+[5/1/2010 0:10:15][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[5/1/2010 0:10:49][CLIENTE]: [212]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[5/1/2010 0:10:50][CLIENTE]: [212]Cliente logou como 1: dougmaitelli!
+[5/1/2010 0:11:51][CLIENTE]: [408]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[5/1/2010 0:11:55][CLIENTE]: [408]Cliente foi desconectado em 127.0.0.1 subnet: 127.0.0!
+[5/1/2010 0:12:17][CLIENTE]: [448]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[5/1/2010 0:12:20][CLIENTE]: [448]Cliente logou como 3: teste!
+[5/1/2010 0:14:47][CLIENTE]: [448]Cliente 3: teste deslogou-se e foi desconectado!
+[5/1/2010 0:15:26][CLIENTE]: [212]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[5/1/2010 1:59:17][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[5/1/2010 1:59:17][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[5/1/2010 1:59:36][CLIENTE]: [212]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[5/1/2010 1:59:36][CLIENTE]: [212]Cliente logou como 3: teste!
+[5/1/2010 1:59:41][CLIENTE]: [212]Cliente 3: teste deslogou-se e foi desconectado!
+[5/1/2010 2:0:10][CLIENTE]: [368]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[5/1/2010 2:0:10][CLIENTE]: [368]Cliente logou como 3: teste!
+[5/1/2010 2:0:21][CLIENTE]: [368]Cliente 3: teste deslogou-se e foi desconectado!
+[5/1/2010 2:3:5][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[5/1/2010 2:3:5][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[5/1/2010 2:3:25][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[8/1/2010 22:27:23][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[8/1/2010 22:27:36][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[8/1/2010 22:28:43][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[8/1/2010 22:32:20][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[8/1/2010 22:32:24][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[8/1/2010 22:33:0][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[8/1/2010 22:41:27][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[8/1/2010 22:41:32][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[8/1/2010 22:41:42][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[8/1/2010 22:42:32][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[8/1/2010 22:42:36][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[8/1/2010 22:42:42][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[8/1/2010 22:43:48][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[8/1/2010 22:43:52][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[8/1/2010 22:45:40][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[8/1/2010 22:45:43][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[8/1/2010 22:51:42][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[8/1/2010 22:51:46][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[8/1/2010 22:52:22][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[8/1/2010 22:53:31][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[8/1/2010 22:53:35][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[8/1/2010 22:54:41][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[8/1/2010 22:57:7][CLIENTE]: [392]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[8/1/2010 22:57:11][CLIENTE]: [392]Cliente logou como 1: dougmaitelli!
+[8/1/2010 22:57:22][CLIENTE]: [392]Cliente 1: dougmaitelli deslogou-se e foi desconectado!
+[25/4/2010 17:52:20][CLIENTE]: [360]Cliente conectado em 127.0.0.1 subnet: 127.0.0!
+[25/4/2010 17:52:20][CLIENTE]: [360]Cliente logou como 1: dougmaitelli!

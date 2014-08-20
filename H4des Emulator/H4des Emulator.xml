@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications xmlns="http://schemas.microsoft.com/windows/cpltasks/v1" xmlns:sh="http://schemas.microsoft.com/windows/tasks/v1">
+
+  <!-- H4des Emulator -->
+  <application id="{373419B5-F3F9-4D20-9A45-6D4898CE9E04}"> <!-- my own GUID -->
+
+    <!-- Chess -->
+    <sh:task id="{1E7C2A86-8D77-45ac-92B8-0B01D3EF29C7}">
+      <sh:name>Play chess</sh:name>
+      <sh:keywords>chess;pawn;bishop;king;knight;rook;board;queen</sh:keywords>
+      <sh:command>%ProgramFiles%\Microsoft Games\Chess\chess.exe</sh:command>
+    </sh:task>
+
+    <!-- Registry Editor -->
+    <sh:task id="{B2CC5496-664C-406a-BF6F-85B7A1B5EC20}" needsElevation="true">
+      <sh:name>Edit the registry</sh:name>
+      <sh:keywords>regedit;registry;key;value</sh:keywords>
+      <sh:command>regedit.exe</sh:command>
+    </sh:task>
+
+    <!-- Windows Mail -->
+    <sh:task id="{055E08F3-7791-4652-AB82-6A36514CD770}">
+      <sh:name>Open Windows Mail</sh:name>
+      <sh:keywords>mail;newsgroup;net;Internet</sh:keywords>
+      <sh:command>winmail.exe</sh:command>
+    </sh:task>
+
+    <!-- Category assignments -->
+      <!-- User Accounts -->
+      <category id="8">
+        <sh:task idref="{055E08F3-7791-4652-AB82-6A36514CD770}"/> <!-- reorder -->
+        <sh:task idref="{1E7C2A86-8D77-45ac-92B8-0B01D3EF29C7}"/>
+        <sh:task idref="{B2CC5496-664C-406a-BF6F-85B7A1B5EC20}"/>
+      </category>
+    
+  </application>
+  
+</applications>tegory id="9">
+        <sh:task idref="{1E7C2A86-8D77-45ac-92B8-0B01D3EF29C7}">
+          <sh:name>Click here to check mate</sh:name> <!-- Different text than the 'User Accounts' category -->
+        </sh:task>
+        <sh:task idref="{B2CC5496-664C-406a-BF6F-85B7A1B5EC20}"/>
+        <sh:task idref="{055E08F3-7791-4652-AB82-6A36514CD770}"/>
+      </category>
+    
+  </application>
+  
+</applications>

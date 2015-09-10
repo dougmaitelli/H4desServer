@@ -8,15 +8,83 @@
 #ifndef CHARACTER_H
 #define	CHARACTER_H
 
+using namespace std;
+
 class Character {
+private:
+    // General
+    unsigned long id;
+    char name[20];
+    Sex sex;
+    unsigned short level;
+    unsigned long experience;
+    unsigned long money;
+    unsigned int hp;
+    unsigned int mp;
+    unsigned int hp_max;
+    unsigned int mp_max;
+
+    unsigned short nation;
+    unsigned short race;
+    unsigned short profession;
+
+    // Items
+	vector<PlayerItem*> items;
+
+    // Equipments
+    PlayerItem* weapon;
+    PlayerItem* second_weapon;
+    PlayerItem* head;
+    PlayerItem* armor;
+    PlayerItem* hands;
+    PlayerItem* feets;
+    PlayerItem* legs;
+    PlayerItem* belt;
+    PlayerItem* robe;
+
+    // Attributes
+    unsigned short strength;
+    unsigned short wisdom;
+    unsigned short health;
+    unsigned short perception;
+    unsigned short charisma;
+    unsigned short dexterity;
+    unsigned short agility;
+    unsigned short magic;
+    unsigned short stamina;
+
+    // Skills
+    vector<Skill*> skills;
+
+    // Points
+    unsigned short attribute_points;
+    unsigned short skill_points;
+
+    // Social
+    Party* party;
+    Guild* guild;
+
+    // Position
+    unsigned short map;
+    float x;
+    float y;
+
+    // Save Point
+    unsigned short save_map;
+    float save_x;
+    float save_y;
+
+    // Friends
+    vector<Player*> friends;
+
 public:
     Character();
     virtual ~Character();
 
     // General
     unsigned long GetId() const;
-    char[] GetName() const;
-    void SetName(char[] name);
+    char* GetName() const;
+    void SetName(char*);
     Sex GetSex() const;
     void SetSex(Sex sex);
     unsigned short GetLevel() const;
@@ -41,28 +109,28 @@ public:
     unsigned short GetProfession() const;
     void SetProfession(unsigned short profession);
 
-    // Equipments
-    Item* GetWeapon() const;
-    void SetWeapon(Item* weapon);
-    Item* GetSecond_weapon() const;
-    void SetSecond_weapon(Item* second_weapon);
-    Item* GetHead() const;
-    void SetHead(Item* head);
-    Item* GetArmor() const;
-    void SetArmor(Item* armor);
-    Item* GetHands() const;
-    void SetHands(Item* hands);
-    Item* GetFeets() const;
-    void SetFeets(Item* feets);
-    Item* GetLegs() const;
-    void SetLegs(Item* legs);
-    Item* GetBelt() const;
-    void SetBelt(Item* belt);
-    Item* GetRobe() const;
-    void SetRobe(Item* robe);
-
     // Items
-    vector<Item*> GetItems() const;
+	vector<PlayerItem*> GetItems() const;
+
+    // Equipments
+    PlayerItem* GetWeapon() const;
+    void SetWeapon(PlayerItem* weapon);
+    PlayerItem* GetSecond_weapon() const;
+    void SetSecond_weapon(PlayerItem* second_weapon);
+    PlayerItem* GetHead() const;
+    void SetHead(PlayerItem* head);
+    PlayerItem* GetArmor() const;
+    void SetArmor(PlayerItem* armor);
+    PlayerItem* GetHands() const;
+    void SetHands(PlayerItem* hands);
+    PlayerItem* GetFeets() const;
+    void SetFeets(PlayerItem* feets);
+    PlayerItem* GetLegs() const;
+    void SetLegs(PlayerItem* legs);
+    PlayerItem* GetBelt() const;
+    void SetBelt(PlayerItem* belt);
+    PlayerItem* GetRobe() const;
+    void SetRobe(PlayerItem* robe);
 
     // Attributes
     unsigned short GetStrength() const;
@@ -117,72 +185,6 @@ public:
 
     // Friends
     vector<Player*> GetFriends() const;
-
-private:
-    // General
-    unsigned long id;
-    char name[20];
-    Sex sex;
-    unsigned short level;
-    unsigned long experience;
-    unsigned long money;
-    unsigned int hp;
-    unsigned int mp;
-    unsigned int hp_max;
-    unsigned int mp_max;
-
-    unsigned short nation;
-    unsigned short race;
-    unsigned short profession;
-
-    // Equipments
-    Item* weapon;
-    Item* second_weapon;
-    Item* head;
-    Item* armor;
-    Item* hands;
-    Item* feets;
-    Item* legs;
-    Item* belt;
-    Item* robe;
-
-    // Items
-    vector<Item*> items;
-
-    // Attributes
-    unsigned short strength;
-    unsigned short wisdom;
-    unsigned short health;
-    unsigned short perception;
-    unsigned short charisma;
-    unsigned short dexterity;
-    unsigned short agility;
-    unsigned short magic;
-    unsigned short stamina;
-
-    // Skills
-    vector<Skill*> skills;
-
-    // Points
-    unsigned short attribute_points;
-    unsigned short skill_points;
-
-    // Social
-    Party* party;
-    Guild* guild;
-
-    // Position
-    unsigned short map;
-    float x;
-    float y;
-
-    // Save Point
-    unsigned short save_map;
-    float save_x;
-    float save_y;
-
-    // Friends
-    vector<Player*> friends;
 };
 
 #endif	/* CHARACTER_H */

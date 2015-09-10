@@ -1,6 +1,6 @@
 /* 
  * File:   WorldServer.cpp
- * Author: DougM
+ * Author: Douglas Maitelli
  * 
  * Created on 4 de Dezembro de 2010, 19:37
  */
@@ -13,7 +13,7 @@ WorldServer::WorldServer() {
 WorldServer::~WorldServer() {
 }
 
-void WorldServer::playerMessage(player_base* player, string msg) {
+void WorldServer::playerMessage(Player* player, string msg) {
     if (player->perm >= GM_LVL) {
         switch (msg[0]) {
             case '/':

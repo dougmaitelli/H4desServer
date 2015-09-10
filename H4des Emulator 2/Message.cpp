@@ -7,138 +7,144 @@
 
 #include "WorldServer.h"
 
-void WorldServer::sendMessage(player_base* player, string message, ...) {
+void WorldServer::serverSendAllMessage(string message, ...) {
     va_list ap;
-    va_start(ap, Menssagem);
-    Transfer_Data data;
-    vsprintf(data.char1, Menssagem, ap);
-    data.comando = 2;
-    send(estecliente->sock, (char*) &data, sizeof (data), 0);
-    va_end(ap);
-}
+    va_start(ap, message);
 
-void WorldServer::sendAll(string message, ...) {
-    va_list ap;
-    va_start(ap, Menssagemen_US);
-    for (UINT i = 0; i < Players.size(); i++) {
-        player_base* estecliente = Players.at(i);
+    for (UINT i = 0; i < players.size(); i++) {
+        Player* toPlayer = players.at(i);
+
         if (estecliente->logado) {
             Transfer_Data data;
-            if (strcmp(estecliente->lang, "pt_BR") == 0) {
-                vsprintf(data.char1, Menssagempt_BR, ap);
-            } else if (strcmp(estecliente->lang, "en_US") == 0) {
-                vsprintf(data.char1, Menssagemen_US, ap);
-            }
+			vsprintf(data.char1, message.c_str(), ap);
             data.comando = 2;
-            send(estecliente->sock, (char*) &data, sizeof (data), 0);
+            send(toPlayer->getSocket(), (char*) &data, sizeof (data), 0);
         }
     }
+
     va_end(ap);
 }
 
-void WorldServer::sendMessageGuild(Guild guild, string message, ...) {
+void WorldServer::serverSendPlayerMessage(Player* player, string message, ...) {
     va_list ap;
-    va_start(ap, Menssagemen_US);
-    for (UINT i = 0; i < Players.size(); i++) {
-        player_base* outrocliente = Players.at(i);
-        if ((outrocliente->chars[outrocliente->chara].guild == guildid) && outrocliente->logado) {
-            Transfer_Data data;
-            if (strcmp(outrocliente->lang, "pt_BR") == 0) {
-                vsprintf(data.char1, Menssagempt_BR, ap);
-            } else if (strcmp(outrocliente->lang, "en_US") == 0) {
-                vsprintf(data.char1, Menssagemen_US, ap);
-            }
-            data.comando = 2;
-            send(outrocliente->sock, (char*) &data, sizeof (data), 0);
-        }
-    }
+    va_start(ap, message);
+
+    Transfer_Data data;
+    vsprintf(data.char1, message.c_str(), ap);
+    data.comando = 2;
+    send(player->getSocket(), (char*) &data, sizeof (data), 0);
+
     va_end(ap);
 }
 
-void WorldServer::sendMessageParty(Party party, string message, ...) {
+void WorldServer::serverSendGuildMessage(Guild* guild, string message, ...) {
     va_list ap;
-    va_start(ap, Menssagemen_US);
-    for (UINT i = 0; i < Players.size(); i++) {
-        player_base* outrocliente = Players.at(i);
-        if ((outrocliente->chars[outrocliente->chara].party == partyid) && outrocliente->charsel) {
-            Transfer_Data data;
-            if (strcmp(outrocliente->lang, "pt_BR") == 0) {
-                vsprintf(data.char1, Menssagempt_BR, ap);
-            } else if (strcmp(outrocliente->lang, "en_US") == 0) {
-                vsprintf(data.char1, Menssagemen_US, ap);
-            }
-            data.comando = 2;
-            send(outrocliente->sock, (char*) &data, sizeof (data), 0);
-        }
+    va_start(ap, message);
+
+    vector<Player*> guildMembers = guild->getPlayers();
+
+    for (UINT i = 0; i < guildMembers.size(); i++) {
+		Player* guildPlayer = guildMembers.at(i);
+
+		Transfer_Data data;
+		vsprintf(data.char1, message.c_str(), ap);
+		data.comando = 2;
+		send(guildPlayer->getSocket(), (char*) &data, sizeof (data), 0);
     }
+
     va_end(ap);
 }
 
-void WorldServer::serverMessage(player_base* player, string message) {
-    for (UINT i = 0; i < Players.size(); i++) {
-        player_base* outrocliente = Players.at(i);
-        if (outrocliente->logado) {
-            Transfer_Data data;
-            sprintf(data.char1, "%s :> %s", estecliente->chars[estecliente->chara].nome, Menssagem);
-            data.comando = 2;
-            send(outrocliente->sock, (char*) &data, sizeof (data), 0);
-        }
-    }
+void WorldServer::serverSendPartyMessage(Party* party, string message, ...) {
+	va_list ap;
+	va_start(ap, message);
+
+	vector<Player*> partyMembers = party->getPlayers();
+
+	for (UINT i = 0; i < partyMembers.size(); i++) {
+		Player* partyPlayer = partyMembers.at(i);
+
+		Transfer_Data data;
+		vsprintf(data.char1, message.c_str(), ap);
+		data.comando = 2;
+		send(partyPlayer->getSocket(), (char*) &data, sizeof (data), 0);
+	}
+
+	va_end(ap);
 }
 
-bool WorldServer::privateMessage(player_base* player, string message) {
-    char* msg;
-    char Menssagem2[255];
-    strcpy(Menssagem2, Menssagem);
-    if ((msg = strtok(Menssagem, " ,.")) == NULL) {
-        return false;
-    }
-    char* player = msg;
-    player_base* outrocliente = GetPlayer(player);
-    if (outrocliente != NULL) {
+void WorldServer::serverMessage(Player* player, string message) {
+	Character* character = player->getCurrentCharacter();
+
+    for (UINT i = 0; i < players.size(); i++) {
+		Player* toPlayer = players.at(i);
+
+		if (estecliente->logado) {
+			Transfer_Data data;
+			sprintf(data.char1, "%s :> %s", character->GetName(), message);
+			data.comando = 2;
+			send(toPlayer->getSocket(), (char*) &data, sizeof (data), 0);
+		}
+	}
+}
+
+void WorldServer::chatMessage(Player* player, string message) {
+	Character* character = player->getCurrentCharacter();
+
+	for (UINT i = 0; i < players.size(); i++) {
+		Player* toPlayer = players.at(i);
+
+		Transfer_Data data;
+		sprintf(data.char1, "%s :> %s", character->GetName(), message);
+		data.comando = 1;
+		send(toPlayer->getSocket(), (char*) &data, sizeof (data), 0);
+	}
+}
+
+bool WorldServer::privateMessage(Player* player, Player* toPlayer, string message) {
+	Character* character = player->getCurrentCharacter();
+
+    if (toPlayer != NULL) {
         Transfer_Data data;
-        CortaStr(Menssagem2, strlen(player) + 1);
-        sprintf(data.char1, "%s :> %s", estecliente->chars[estecliente->chara].nome, Menssagem2);
+        sprintf(data.char1, "%s :> %s", character->GetName(), message);
         data.comando = 3;
-        send(outrocliente->sock, (char*) &data, sizeof (data), 0);
+        send(toPlayer->getSocket(), (char*) &data, sizeof (data), 0);
         return true;
     } else {
         return false;
     }
 }
 
-void WorldServer::guildMessage(player_base* player, string message) {
-    for (UINT i = 0; i < Players.size(); i++) {
-        player_base* outrocliente = Players.at(i);
-        if ((outrocliente->chars[outrocliente->chara].guild == estecliente->chars[estecliente->chara].guild) && outrocliente->charsel) {
-            Transfer_Data data;
-            sprintf(data.char1, "%s :> %s", estecliente->chars[estecliente->chara].nome, Menssagem);
-            data.comando = 4;
-            send(outrocliente->sock, (char*) &data, sizeof (data), 0);
-        }
+void WorldServer::guildMessage(Player* player, string message) {
+	Character* character = player->getCurrentCharacter();
+	Guild* guild = character->GetGuild();
+
+	vector<Player*> guildMembers = guild->getPlayers();
+
+	for (UINT i = 0; i < guildMembers.size(); i++) {
+		Player* guildPlayer = guildMembers.at(i);
+
+		Transfer_Data data;
+		sprintf(data.char1, "%s :> %s", character->GetName(), message);
+		data.comando = 4;
+		send(guildPlayer->getSocket(), (char*) &data, sizeof (data), 0);
+	}
+}
+
+void WorldServer::partyMessage(Player* player, string message) {
+	Character* character = player->getCurrentCharacter();
+	Party* party = character->GetParty();
+
+	vector<Player*> partyMembers = party->getPlayers();
+
+    for (UINT i = 0; i < partyMembers.size(); i++) {
+    	Player* partyPlayer = partyMembers.at(i);
+
+		Transfer_Data data;
+		sprintf(data.char1, "%s :> %s", character->GetName(), message);
+		data.comando = 5;
+		send(partyPlayer->getSocket(), (char*) &data, sizeof (data), 0);
     }
 }
 
-void WorldServer::partyMessage(player_base* player, string message) {
-    for (UINT i = 0; i < Players.size(); i++) {
-        player_base* outrocliente = Players.at(i);
-        if ((outrocliente->chars[outrocliente->chara].party == estecliente->chars[estecliente->chara].party) && outrocliente->charsel) {
-            Transfer_Data data;
-            sprintf(data.char1, "%s :> %s", estecliente->chars[estecliente->chara].nome, Menssagem);
-            data.comando = 5;
-            send(outrocliente->sock, (char*) &data, sizeof (data), 0);
-        }
-    }
-}
 
-void WorldServer::chatMessage(player_base* player, string message) {
-    for (UINT i = 0; i < Players.size(); i++) {
-        player_base* outrocliente = Players.at(i);
-        if ((outrocliente->chars[outrocliente->chara].map == estecliente->chars[estecliente->chara].map) && outrocliente->charsel) {
-            Transfer_Data data;
-            sprintf(data.char1, "%s :> %s", estecliente->chars[estecliente->chara].nome, Menssagem);
-            data.comando = 1;
-            send(outrocliente->sock, (char*) &data, sizeof (data), 0);
-        }
-    }
-}

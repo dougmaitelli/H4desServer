@@ -1,13 +1,13 @@
 /* 
- * File:   Utilitarios.cpp
- * Author: DougM
+ * File:   Utils.cpp
+ * Author: Douglas Maitelli
  * 
- * Created on 14 de Abril de 2011, 20:08
+ * Created on April, 14 2011, 20:08
  */
 
-#include "Utilitarios.h"
+#include "Utils.h"
 
-string Utilitarios::addSlashes(string str) {
+string Utils::addSlashes(string str) {
     string str2;
 
     for (unsigned int i = 0; i < str.length(); i++) {
@@ -21,7 +21,7 @@ string Utilitarios::addSlashes(string str) {
     return str2;
 }
 
-string Utilitarios::trimStr(string str) {
+string Utils::trimStr(string str) {
     for (unsigned int i = 0; i < str.length(); i++) {
         if (str[i] == ' ') {
             str.erase(i);

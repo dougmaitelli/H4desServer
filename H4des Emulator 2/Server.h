@@ -8,9 +8,9 @@
 #ifndef SERVER_H
 #define	SERVER_H
 
-#include <windows.h>
-
 #include "WorldServer.h"
+
+using namespace std;
 
 class Server {
 public:
@@ -27,9 +27,8 @@ private:
     SOCKET s;
     Database* db;
 
-    vector<player_base*> Players;
-    vector<items_base*> Items;
-    vector<guilds_base*> Guilds;
+    vector<Item*> Items;
+    vector<Guild*> Guilds;
 };
 
 #endif	/* SERVER_H */

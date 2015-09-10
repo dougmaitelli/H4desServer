@@ -3,7 +3,7 @@
 #include <cstdio>
 #include <iostream>
 
-#include "../comum/log.h"
+#include "../commom/log.h"
 #include "worldserver.h"
 
 using namespace std;

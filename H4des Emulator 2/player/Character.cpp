@@ -132,61 +132,61 @@ void Character::SetStrength(unsigned short strength) {
 unsigned short Character::GetStrength() const {
     return strength;
 }
-vector<Item*> Character::GetItems() const {
+vector<PlayerItem*> Character::GetItems() const {
     return items;
 }
-void Character::SetRobe(Item* robe) {
+void Character::SetRobe(PlayerItem* robe) {
     this->robe = robe;
 }
-Item* Character::GetRobe() const {
+PlayerItem* Character::GetRobe() const {
     return robe;
 }
-void Character::SetBelt(Item* belt) {
+void Character::SetBelt(PlayerItem* belt) {
     this->belt = belt;
 }
-Item* Character::GetBelt() const {
+PlayerItem* Character::GetBelt() const {
     return belt;
 }
-void Character::SetLegs(Item* legs) {
+void Character::SetLegs(PlayerItem* legs) {
     this->legs = legs;
 }
-Item* Character::GetLegs() const {
+PlayerItem* Character::GetLegs() const {
     return legs;
 }
-void Character::SetFeets(Item* feets) {
+void Character::SetFeets(PlayerItem* feets) {
     this->feets = feets;
 }
-Item* Character::GetFeets() const {
+PlayerItem* Character::GetFeets() const {
     return feets;
 }
-void Character::SetHands(Item* hands) {
+void Character::SetHands(PlayerItem* hands) {
     this->hands = hands;
 }
-Item* Character::GetHands() const {
+PlayerItem* Character::GetHands() const {
     return hands;
 }
-void Character::SetArmor(Item* armor) {
+void Character::SetArmor(PlayerItem* armor) {
     this->armor = armor;
 }
-Item* Character::GetArmor() const {
+PlayerItem* Character::GetArmor() const {
     return armor;
 }
-void Character::SetHead(Item* head) {
+void Character::SetHead(PlayerItem* head) {
     this->head = head;
 }
-Item* Character::GetHead() const {
+PlayerItem* Character::GetHead() const {
     return head;
 }
-void Character::SetSecond_weapon(Item* second_weapon) {
+void Character::SetSecond_weapon(PlayerItem* second_weapon) {
     this->second_weapon = second_weapon;
 }
-Item* Character::GetSecond_weapon() const {
+PlayerItem* Character::GetSecond_weapon() const {
     return second_weapon;
 }
-void Character::SetWeapon(Item* weapon) {
+void Character::SetWeapon(PlayerItem* weapon) {
     this->weapon = weapon;
 }
-Item* Character::GetWeapon() const {
+PlayerItem* Character::GetWeapon() const {
     return weapon;
 }
 void Character::SetProfession(unsigned short profession) {
@@ -255,10 +255,10 @@ void Character::SetSex(Sex sex) {
 Sex Character::GetSex() const {
     return sex;
 }
-void Character::SetName(char[] name) {
+void Character::SetName(char* name) {
     this->name = name;
 }
-char[] Character::GetName() const {
+char* Character::GetName() const {
     return name;
 }
 unsigned long Character::GetId() const {

@@ -9,12 +9,11 @@
 #define	SKILL_H
 
 class Skill {
-public:
-    Skill();
-    Skill(const Skill& orig);
-    virtual ~Skill();
 private:
 
+public:
+    Skill();
+    virtual ~Skill();
 };
 
 #endif	/* SKILL_H */

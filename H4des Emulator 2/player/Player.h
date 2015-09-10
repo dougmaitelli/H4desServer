@@ -9,9 +9,6 @@
 #define	PLAYER_H
 
 class Player {
-public:
-    Player();
-    virtual ~Player();
 private:
     unsigned long id;
     char user[100];
@@ -22,9 +19,17 @@ private:
     Lang lang;
     unsigned int warn;
     unsigned short perm;
-    unsigned char character;
+    Character* currentCharacter;
     unsigned char ban;
     unsigned char hide;
+
+public:
+    Player();
+    virtual ~Player();
+
+    SOCKET getSocket() const;
+    const Character*& getCurrentCharacter() const;
+    void setCurrentCharacter(Character*&);
 };
 
 #endif	/* PLAYER_H */

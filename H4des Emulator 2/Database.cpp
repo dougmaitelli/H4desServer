@@ -16,7 +16,7 @@ Database::Database() {
 
     MutexSQL = PTHREAD_MUTEX_INITIALIZER;
 
-    mysql_library_init();
+    mysql_library_init(0, NULL, NULL);
 }
 
 Database::~Database() {

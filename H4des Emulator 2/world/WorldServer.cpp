@@ -7,7 +7,8 @@
 
 #include "WorldServer.h"
 
-WorldServer::WorldServer() {
+WorldServer::WorldServer(Server* server) {
+	this->server = server;
 }
 
 WorldServer::~WorldServer() {
@@ -47,4 +48,12 @@ void WorldServer::playerMessage(Player* player, string msg) {
             this->chatMessage(player, msg);
             return;
     }
+}
+
+void WorldServer::savePlayer(Player* player) {
+	//TODO
+}
+
+void WorldServer::disconnectPlayer(Player* player) {
+    server->disconnectPlayer(player);
 }

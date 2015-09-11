@@ -12,24 +12,30 @@ class Player {
 private:
     unsigned long id;
     char user[100];
-    SOCKET socket;
-    sockaddr_in client_socket;
-    char ip[16];
-    char subnet[12];
     Lang lang;
     unsigned int warn;
     unsigned short perm;
-    Character* currentCharacter;
     unsigned char ban;
     unsigned char hide;
+
+    Character* currentCharacter;
 
 public:
     Player();
     virtual ~Player();
 
-    SOCKET getSocket() const;
+	SOCKET socket;
+	sockaddr_in sockeAddr;
+	char ip[16];
+	char subnet[12];
+	bool active;
+
     const Character*& getCurrentCharacter() const;
     void setCurrentCharacter(Character*&);
+    
+    SOCKET getSocket() const;
+    char* getIp() const;
+    char* getSubnet() const;
 };
 
 #endif	/* PLAYER_H */

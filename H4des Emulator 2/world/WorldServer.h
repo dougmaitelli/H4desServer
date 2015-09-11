@@ -9,21 +9,8 @@
 #define	WORLDSERVER_H
 
 #include <pthread.h>
-#include <mysql.h>
 
 #include "Utils.h"
-
-#define SERVER_NAME "H4des"
-
-#define MAX_PLAYER_CHARS 5
-
-#define DATA_FOLDER "data/"
-
-#define ITEMS_PATH DATAFOLDER + "items/items.csv"
-#define MONSTER_PATH DATAFOLDER + "monsters/monsters.csv"
-#define NPCS_PATH DATAFOLDER + "npcs/npcs.csv"
-#define QUESTS_PATH DATAFOLDER + "quests/quests.csv"
-#define SKILLS_PATH DATAFOLDER + "skills/skills.csv"
 
 struct Transfer_Data {
     int command;
@@ -45,10 +32,12 @@ enum ItemType {
 
 class WorldServer {
 private:
+	Server* server;
+
     vector<Player*> players;
 
 public:
-    WorldServer();
+    WorldServer(Server*);
     virtual ~WorldServer();
 
     //------------------------------------------------------------------------
@@ -110,6 +99,7 @@ public:
 	static unsigned int A_GUILDLVL_PERM;
 	static unsigned int A_SAVE_PERM;
 
+	// Message
     void playerMessage(Player*, string);
     void serverSendAllMessage(string, ...);
     void serverSendPlayerMessage(Player*, string, ...);
@@ -171,6 +161,10 @@ public:
 	bool GM_A_maxhab(Player* estecliente, char* player);
 	bool GM_A_guildlvl(Player* estecliente, char* player, int lvl);
 	bool GM_A_save(Player* estecliente, char* player);
+
+	// Player
+	void savePlayer(Player*);
+    void disconnectPlayer(Player*);
 };
 
 #endif	/* WORLDSERVER_H */

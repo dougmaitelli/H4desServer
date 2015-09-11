@@ -17,99 +17,71 @@ Server::Server() {
 Server::~Server() {
 }
 
-Server::initServer() {
+bool Server::initServer() {
     Log::write(LOGO);
 
-    Log::write(LOAD, "[                    ] 0% > Inicializando o WinSock...");
+    Log::write(LOAD, "[                    ] 0% > Initializing WinSock...");
     WSADATA w;
     int error = WSAStartup(MAKEWORD(2, 2), &w);
     if (error) {
         WSACleanup();
-        Log::write(ERRO, "A inicializacao do WinSock falhou!");
-        MessageBox(NULL, "A inicializacao do WinSock falhou!", "WSAStartup", MB_RETRYCANCEL);
+        Log::write(MsgType::SERVER_ERROR, "The WinSock initialization failed!");
         return false;
     }
-    Log::write(LOAD, "[|                   ] 5% > Verificando versao do WinSock...");
+    Log::write(LOAD, "[|                   ] 5% > Verifying WinSock version...");
     if (w.wVersion != MAKEWORD(2, 2)) {
         WSACleanup();
-        Log::write(ERRO, "Versao incorreta do WinSock!");
-        MessageBox(NULL, "Versao incorreta do WinSock!", "WSAStartup", MB_RETRYCANCEL);
+        Log::write(MsgType::SERVER_ERROR, "Invalid WinSock version!");
         return false;
     }
-    Log::write(LOAD, "[||                  ] 10% > Criando Socket...");
+    Log::write(LOAD, "[||                  ] 10% > Creating socket...");
     s = socket(AF_INET, SOCK_STREAM, 0);
     if (s == INVALID_SOCKET) {
         closesocket(s);
         WSACleanup();
-        Log::write(ERRO, "Nao foi possivel criar o Socket");
-        MessageBox(NULL, "Nao foi possivel criar o Socket!", "Socket", MB_RETRYCANCEL);
+        Log::write(MsgType::SERVER_ERROR, "Error creating socket");
         return false;
     }
-    Log::write(LOAD, "[|||                 ] 15% > Alterando opcoes do Socket...");
+    Log::write(MsgType::LOAD, "[|||                 ] 15% > Setting socket options...");
     int option = 1;
-    do {
-        if (setsockopt(s, SOL_SOCKET, SO_KEEPALIVE, (const char*) &option, sizeof (option)) == -1) {
-            closesocket(s);
-            WSACleanup();
-            Log::write(ERRO, "Erro ao editar op��es do Socket!");
-            if (MessageBox(NULL, "Erro ao editar opcoes do Socket!", "Socket", MB_RETRYCANCEL | MB_ICONWARNING) == IDCANCEL) {
-                return false;
-            }
-        } else {
-            break;
-        }
-    } while (true);
+	if (setsockopt(s, SOL_SOCKET, SO_KEEPALIVE, (const char*) &option, sizeof (option)) == -1) {
+		closesocket(s);
+		WSACleanup();
+		Log::write(MsgType::SERVER_ERROR, "Error setting socket options!");
+	}
     setsockopt(s, IPPROTO_TCP, TCP_NODELAY, (const char*) &option, sizeof (option));
-    Log::write(LOAD, "[||||                ] 20% > Preparando servidor...");
+    Log::write(LOAD, "[||||                ] 20% > Binding server port...");
     u_short port = 5001;
     sockaddr_in addr;
     addr.sin_family = AF_INET;
     addr.sin_port = htons(port);
     addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    do {
-        if (bind(s, (LPSOCKADDR) & addr, sizeof (addr)) == SOCKET_ERROR) {
-            closesocket(s);
-            WSACleanup();
-            Log::write(ERRO, "A funcao \"bind\" falhou...");
-            if (MessageBox(NULL, "A funcao \"bind\" falhou...", "WSAStartup", MB_RETRYCANCEL | MB_ICONWARNING) == IDCANCEL) {
-                return false;
-            }
-        } else {
-            break;
-        }
-    } while (true);
-    Log::write(LOAD, "[|||||               ] 25% > Preparando recebimento de dados...");
-    do {
-        if (listen(s, SOMAXCONN) == SOCKET_ERROR) {
-            closesocket(s);
-            WSACleanup();
-            Log::write(ERRO, "A funcao \"listen\" falhou...");
-            if (MessageBox(NULL, "A funcao \"listen\" falhou...", "WSAStartup", MB_RETRYCANCEL | MB_ICONWARNING) == IDCANCEL) {
-                return false;
-            }
-        } else {
-            break;
-        }
-    } while (true);
-    Log::write(LOAD, "[||||||              ] 30% > Iniciando classe do banco de dados...");
+	if (bind(s, (LPSOCKADDR) & addr, sizeof (addr)) == SOCKET_ERROR) {
+		closesocket(s);
+		WSACleanup();
+		Log::write(MsgType::SERVER_ERROR, "Error binding server port!");
+	}
+    Log::write(LOAD, "[|||||               ] 25% > Starting server listen...");
+	if (listen(s, SOMAXCONN) == SOCKET_ERROR) {
+		closesocket(s);
+		WSACleanup();
+		Log::write(MsgType::SERVER_ERROR, "Error starting server listen!");
+	}
+    Log::write(LOAD, "[||||||              ] 30% > Connecting to the database...");
     db = new Database();
-    if (!db->init()) {
-        Log::write(ERRO, "A inicializacao da classe do banco de dados falhou...");
-        return false;
-    }
     if (!db->connect()) {
-        Log::write(ERRO, "A conexao com o banco de dados falhou...");
+        Log::write(MsgType::SERVER_ERROR, "Error connecting to the database!");
         return false;
     }
-    if (!ServerLoad()) {
-        Log(ERRO, true, "Ocorreu um erro ao carregar os principais dados do server...");
+    if (!this->loadServer()) {
+        Log(MsgType::SERVER_ERROR, true, "Error loading server data!");
         return false;
     }
-    Log::write(SYSTEM, "Server iniciado na porta %i.", port);
-    ServerLoop();
-    for (UINT i = 0; i < Players.size(); i++) {
-        player_base* estecliente = Players.at(i);
-        DesconectaPlayer(estecliente);
+    Log::write(SYSTEM, "Server started on port %i.", port);
+    this->serverLoop();
+    for (UINT i = 0; i < players.size(); i++) {
+        Player* player = players.at(i);
+        this->disconnectPlayer(player);
     }
     db->wait();
     db->close();
@@ -120,44 +92,44 @@ Server::initServer() {
     return true;
 }
 
-Server::loadServer() {
+bool Server::loadServer() {
      Log::write(LOAD, "[||||||||||          ] 50% > Carregando configuracoes do server...");
-     if (!LoadConfig()) {
-        Log::write(ERRO, "Ocorreu um erro ao carregar as configuracoes do server...");
+     if (!this->loadConfig()) {
+        Log::write(MsgType::SERVER_ERROR, "Ocorreu um erro ao carregar as configuracoes do server...");
         return false;
      }
      Log::write(LOAD, "[|||||||||||         ] 55% > Reseetando status dos players...");
-     if (!ResetOnlines()) {
-         Log::write(ERRO, "Ocorreu um erro ao resetar os status dos players...");
+     if (!this->resetOnlines()) {
+         Log::write(MsgType::SERVER_ERROR, "Ocorreu um erro ao resetar os status dos players...");
      }
      Log::write(LOAD, "[|||||||||||         ] 60% > Carregando dados dos items...");
-     if (!LoadItems()) {
-        Log::write(ERRO, "Ocorreu um erro ao carregar dados dos items...");
+     if (!this->loadItems()) {
+        Log::write(MsgType::SERVER_ERROR, "Ocorreu um erro ao carregar dados dos items...");
         return false;
      }
      Log::write(LOAD, "[|||||||||||||       ] 65% > Carregando dados dos monstros...");
-     if (!LoadMonsters()) {
-        Log::write(ERRO, "Ocorreu um erro ao carregar dados dos monstros...");
+     if (!this->loadMonsters()) {
+        Log::write(MsgType::SERVER_ERROR, "Ocorreu um erro ao carregar dados dos monstros...");
         return false;
      }
      Log::write(LOAD, "[||||||||||||||      ] 70% > Carregando dados dos NPCs...");
-     if (!LoadNPCS()) {
-        Log::write(ERRO, "Ocorreu um erro ao carregar dados dos NPCs...");
+     if (!this->loadNPCS()) {
+        Log::write(MsgType::SERVER_ERROR, "Ocorreu um erro ao carregar dados dos NPCs...");
         return false;
      }
      Log::write(LOAD, "[||||||||||||||||    ] 80% > Carregando dados das quests...");
-     if (!LoadQuests()) {
-        Log::write(ERRO, "Ocorreu um erro ao carregar dados das quests...");
+     if (!this->loadQuests()) {
+        Log::write(MsgType::SERVER_ERROR, "Ocorreu um erro ao carregar dados das quests...");
         return false;
      }
      Log::write(LOAD, "[||||||||||||||||||  ] 90% > Carregando dados das skills...");
-     if (!LoadSkills()) {
-        Log::write(ERRO, "Ocorreu um erro ao carregar dados das skills...");
+     if (!this->loadSkills()) {
+        Log::write(MsgType::SERVER_ERROR, "Ocorreu um erro ao carregar dados das skills...");
         return false;
      }
      Log::write(LOAD, "[||||||||||||||||||| ] 95% > Carregando dados das guilds...");
-     if (!LoadGuilds()) {
-        Log::write(ERRO, "Ocorreu um erro ao carregar dados das guilds...");
+     if (!this->loadGuilds()) {
+        Log::write(MsgType::SERVER_ERROR, "Ocorreu um erro ao carregar dados das guilds...");
         return false;
      }
      Log::write(LOAD, "[||||||||||||||||||||] 100% > Carregando dados das guilds...");
@@ -165,7 +137,7 @@ Server::loadServer() {
      return true;
 }
 
-Server::loadConfig() {
+bool Server::loadConfig() {
     WorldServer::MAX_PLAYERS = GetPrivateProfileInt("Config", "MAX_PLAYERS", 500, ".//config.ini");
 
     WorldServer::LVL_MAX = GetPrivateProfileInt("Config", "LVL_MAX", 999, ".//config.ini");
@@ -224,8 +196,7 @@ Server::loadConfig() {
     return true;
 }
 
-player_base* Server::GetUser(char* nome)
-{
+player_base* Server::GetUser(char* nome) {
     for (UINT i=0;i<Players.size();i++) {
         player_base* estecliente = Players.at(i);
         if (estecliente->logado) {
@@ -237,8 +208,7 @@ player_base* Server::GetUser(char* nome)
     return NULL;
 }
 
-player_base* Server::GetPlayer(char* nome)
-{
+player_base* Server::GetPlayer(char* nome) {
     for (UINT i=0;i<Players.size();i++) {
         player_base* estecliente = Players.at(i);
         if (estecliente->charsel) {
@@ -250,8 +220,7 @@ player_base* Server::GetPlayer(char* nome)
     return NULL;
 }
 
-guilds_base* Server::GetGuild(char* nome)
-{
+guilds_base* Server::GetGuild(char* nome) {
     for (UINT i=0;i<Guilds.size();i++) {
         guilds_base* guild = Guilds.at(i);
         if (strcasecmp(guild->nome, nome)==0) {
@@ -261,43 +230,18 @@ guilds_base* Server::GetGuild(char* nome)
     return NULL;
 }
 
-guilds_base* Server::GetGuildId(unsigned long id)
-{
-    for (UINT i=0;i<Guilds.size();i++) {
-        guilds_base* guild = Guilds.at(i);
-        if (guild->id == id) {
-            return guild;
-        }
-    }
-    return NULL;
-}
-
-bool Server::ResetOnlines()
-{
-    if (!QueryDB("UPDATE users SET online ='0' WHERE online ='1'")) {
-        Log(ERRO,true,"Erro ao resetar status online dos usu�rios...");
-        return false;
-    }
-    if (!QueryDB("UPDATE chars SET online ='0' WHERE online ='1'")) {
-        Log(ERRO,true,"Erro ao resetar status online dos chars...");
-        return false;
-    }
-    return true;
-}
-
-bool Server::LoadItems()
-{
+bool Server::loadItems() {
      FILE* file;
      char* dados;
      char linha[255];
      file = fopen(ITEMS_PATH, "r");
      if (file == NULL) {
-        Log(ERRO,true,"Erro ao abrir arquivo %s...", ITEMS_PATH);
+        Log(MsgType::SERVER_ERROR,true,"Erro ao abrir arquivo %s...", ITEMS_PATH);
         return false;
      }
      fgets(linha, sizeof(linha), file);
      do {
-        items_base* item = new (nothrow) items_base;
+        Item* item = new Item();
         fgets(linha, sizeof(linha), file);
         if (feof(file)) {
            break;
@@ -350,35 +294,32 @@ bool Server::LoadItems()
         item->y_dest = atoi(dados);
         dados = strtok(linha, ";");
         item->venda = atoi(dados);
-        Items.push_back(item);
+
+        items.push_back(item);
      } while(true);
+
      fclose(file);
-     Log(SYSTEM,true,"Foram carregados %i items.", Items.size());
+     Log(SYSTEM, true, "%i items loaded.", items.size());
      return true;
 }
 
-bool Server::LoadMonsters()
-{
+bool Server::loadMonsters() {
      return true;
 }
 
-bool Server::LoadNPCS()
-{
+bool Server::loadNPCS() {
      return true;
 }
 
-bool Server::LoadQuests()
-{
+bool Server::loadQuests() {
      return true;
 }
 
-bool Server::LoadSkills()
-{
+bool Server::loadSkills() {
      return true;
 }
 
-bool Server::LoadGuilds()
-{
+bool Server::loadGuilds() {
      MYSQL_RES* res;
      MYSQL_ROW row;
      res = QueryResult("SELECT * FROM guilds");
@@ -386,33 +327,18 @@ bool Server::LoadGuilds()
          return false;
      }
      while (row = mysql_fetch_row(res)) {
-         guilds_base* guild = new (nothrow) guilds_base;
+         Guild* guild = new Guild();
          guild->id = atoi(row[0]);
          sprintf(guild->nome, row[1]);
          guild->lider = atoi(row[2]);
          guild->lvl = atoi(row[3]);
-         Guilds.push_back(guild);
+         guilds.push_back(guild);
      }
-     Log(SYSTEM,true,"Foram carregadas %i guilds.", Guilds.size());
+     Log(SYSTEM,true,"%i guilds loaded.", guilds.size());
      return true;
 }
 
-void Server::Cls() {
-    COORD coordScreen = {0, 0};
-    DWORD cCharsWritten;
-    CONSOLE_SCREEN_BUFFER_INFO csbi;
-    DWORD dwConSize;
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
-    GetConsoleScreenBufferInfo(hConsole, &csbi);
-    dwConSize = csbi.dwSize.X * csbi.dwSize.Y;
-    FillConsoleOutputCharacter(hConsole, TEXT(' '), dwConSize, coordScreen, &cCharsWritten);
-    FillConsoleOutputAttribute(hConsole, csbi.wAttributes, dwConSize, coordScreen, &cCharsWritten);
-    SetConsoleCursorPosition(hConsole, coordScreen);
-}
-
-void Server::ServerLoop()
-{
+void Server::serverLoop() {
     SOCKET novocliente;
     sockaddr_in	cliente_sock;
     int addr_size = sizeof(sockaddr_in);
@@ -427,100 +353,110 @@ void Server::ServerLoop()
         FD_SET(s, &fds);
 		atividade = select(maxfd + 1, &fds, NULL, NULL, &timeout);
 		if (atividade == SOCKET_ERROR) {
-			Log(ERRO, false, "A funcao \"select\" falhou... Erro: #%i", WSAGetLastError());
+			Log(MsgType::SERVER_ERROR, false, "Error looking for new connection... Error: #%i", WSAGetLastError());
 		}
 		if (atividade > 0)  {
-           if (FD_ISSET(s, &fds) && Players.size() < MAX_PLAYERS) {
+           if (FD_ISSET(s, &fds) && players.size() < MAX_PLAYERS) {
               novocliente = accept(s, (sockaddr*)&cliente_sock, &addr_size);
               if (novocliente == INVALID_SOCKET) {
-                 Log(ERRO, false, "Erro ao aceitar conexao... Erro: #%i", WSAGetLastError());
+                 Log(MsgType::SERVER_ERROR, false, "Error accepting new connection... Error: #%i", WSAGetLastError());
               } else {
-                 AdicionaPlayer(novocliente, &cliente_sock);
+                 this->addPlayer(novocliente, &cliente_sock);
               }
            }
         }
         if (RESTART_SERVER == 1) {
             break;
         }
-    } while(EXIT_SERVER_PROCESS != 1);
+    } while(EXIT_SERVER_PROCCESS != 1);
 }
 
-void Server::AdicionaPlayer(SOCKET novocliente, sockaddr_in* client_sock)
-{
-    player_base* estecliente = new (nothrow)player_base;
-
-    estecliente->logado = false;
-    estecliente->ativo = true;
-
-    estecliente->sock = novocliente;
-    estecliente->ip = inet_ntoa(client_sock->sin_addr);
-    memset(&estecliente->subnet, '\0', 12);
-    sprintf(estecliente->subnet, "%li.%li.%li", (client_sock->sin_addr.s_addr)&0xFF,
-           (client_sock->sin_addr.s_addr>>8)&0xFF, (client_sock->sin_addr.s_addr>>16)&0xFF);
-    Players.push_back(estecliente);
-    memcpy(&estecliente->client_sock, client_sock, sizeof(struct sockaddr_in));
-    Log(CLIENT, false, "[%i]Cliente conectado em %s subnet: %s!", estecliente->sock, estecliente->ip, estecliente->subnet);
-    pthread_create(&thread[novocliente], NULL, AtualizaPlayers, (PVOID)estecliente);
+bool Server::resetOnlines() {
+    if (!QueryDB("UPDATE users SET online ='0' WHERE online ='1'")) {
+        Log(MsgType::SERVER_ERROR,true,"Erro ao resetar status online dos usu�rios...");
+        return false;
+    }
+    if (!QueryDB("UPDATE chars SET online ='0' WHERE online ='1'")) {
+        Log(MsgType::SERVER_ERROR,true,"Erro ao resetar status online dos chars...");
+        return false;
+    }
+    return true;
 }
 
-PVOID AtualizaPlayers(PVOID estecliente)
-{
-    fd_set fds;
-    player_base* estecliente2 = (player_base*)estecliente;
-    do {
-        FD_ZERO(&fds);
-        FD_SET(estecliente2->sock, &fds);
-		int atividade = select(estecliente2->sock+1, &fds, NULL, NULL, NULL);
-		if (atividade == SOCKET_ERROR) {
-			Log(ERRO, false, "A fun��o \"select\" falhou... Erro: #%i", WSAGetLastError());
-		}
-		if (atividade > 0) {
-		   if (FD_ISSET(estecliente2->sock, &fds)) {
-              char buffer[10000];
-              int recebido = recv(estecliente2->sock, buffer, sizeof(buffer), 0);
-              if (recebido <= 0) {
-                 if (estecliente2->ativo) {
-                    server->DesconectaPlayer(estecliente2);
-                 }
-                 break;
-              } else {
-                 server->PacoteExec(estecliente2, buffer);
-              }
-           }
-        }
-    } while(estecliente2->ativo);
-    server->DeletaPlayer(estecliente2);
-    pthread_exit(NULL);
-    return false;
+void Server::addPlayer(SOCKET clientSocket, sockaddr_in* clientSockAddr) {
+    Player* player = new Player();
+
+    player->logado = false;
+    player->active = true;
+
+    player->socket = clientSocket;
+    player->ip = inet_ntoa(clientSockAddr->sin_addr);
+    memset(&player->subnet, '\0', 12);
+    sprintf(player->subnet, "%li.%li.%li", (clientSockAddr->sin_addr.s_addr)&0xFF,
+           (clientSockAddr->sin_addr.s_addr>>8)&0xFF, (clientSockAddr->sin_addr.s_addr>>16)&0xFF);
+    players.push_back(player);
+    memcpy(&player->sockeAddr, clientSockAddr, sizeof(struct sockaddr_in));
+    Log(CLIENT, false, "[%i]Client connected in %s subnet: %s!", player->getSocket(), player->getIp(), player->getSubnet());
+    pthread_create(&thread[clientSocket], NULL, refreshPlayers, (PVOID) player);
 }
 
-void Server::DesconectaPlayer(player_base* estecliente)
-{
-     if (estecliente->logado) {
-        Log(CLIENT, false, "[%i]Cliente %i: %s deslogou-se e foi desconectado!", estecliente->sock, estecliente->id, estecliente->usuario);
-     } else {
-        Log(CLIENT, false, "[%i]Cliente foi desconectado em %s subnet: %s!", estecliente->sock, estecliente->ip, estecliente->subnet);
-     }
-     if (!QueryDB("UPDATE users SET online ='0' WHERE id ='%i'", estecliente->id)) {
-        Log(ERRO, false, "N�o foi poss�vel atualizar o status do player: %i:%s para offline", estecliente->id, estecliente->usuario);
-     }
-     if (!QueryDB("UPDATE chars SET online ='0' WHERE user ='%i'", estecliente->id)) {
-        Log(ERRO, false, "N�o foi poss�vel atualizar o status do char do player: %i:%s para offline", estecliente->id, estecliente->usuario);
-     }
-     estecliente->ativo = false;
-     closesocket(estecliente->sock);
-}
+void Server::removePlayer(Player* player) {
+     pthread_mutex_lock(&playersMutex);
 
-void Server::DeletaPlayer(player_base* estecliente)
-{
-     pthread_mutex_lock(&MutexDeleta);
-     for (UINT i=0;i<Players.size();i++) {
-         player_base* outrocliente = Players.at(i);
-         if (estecliente == outrocliente) {
-            Players.erase(Players.begin()+i);
-            delete outrocliente;
+     for (UINT i = 0; i < players.size(); i++) {
+         Player* toPlayer = players.at(i);
+
+         if (player == toPlayer) {
+            players.erase(players.begin() + i);
+            delete toPlayer;
             break;
         }
      }
-     pthread_mutex_unlock(&MutexDeleta);
+
+     pthread_mutex_unlock(&playersMutex);
+}
+
+void Server::disconnectPlayer(Player* player) {
+	Log(CLIENT, false, "[%i]Client disconnected in %s subnet: %s!", player->getSocket(), player->getIp(), player->getSubnet());
+     if (!QueryDB("UPDATE users SET online ='0' WHERE id ='%i'", estecliente->id)) {
+        Log(MsgType::SERVER_ERROR, false, "N�o foi poss�vel atualizar o status do player: %i:%s para offline", estecliente->id, estecliente->usuario);
+     }
+     if (!QueryDB("UPDATE chars SET online ='0' WHERE user ='%i'", estecliente->id)) {
+        Log(MsgType::SERVER_ERROR, false, "N�o foi poss�vel atualizar o status do char do player: %i:%s para offline", estecliente->id, estecliente->usuario);
+     }
+     player->active = false;
+     closesocket(player->getSocket());
+}
+
+PVOID refreshPlayers(PVOID playerP) {
+    fd_set fds;
+
+    Player* player = (Player*) playerP;
+
+    do {
+        FD_ZERO(&fds);
+        FD_SET(player->socket, &fds);
+		int atividade = select(player->socket + 1, &fds, NULL, NULL, NULL);
+		if (atividade == SOCKET_ERROR) {
+			Log(MsgType::CLIENT, false, "[%i]Client socket error in %s subnet: %s! Error: #%i", player->getSocket(), player->getIp(), player->getSubnet(), WSAGetLastError());
+		}
+		if (atividade > 0) {
+		   if (FD_ISSET(player->socket, &fds)) {
+              char buffer[10000];
+              int received = recv(player->socket, buffer, sizeof(buffer), 0);
+              if (received <= 0) {
+                 if (player->active) {
+                    server->disconnectPlayer(player);
+                 }
+                 break;
+              } else {
+                 server->PacoteExec(player, buffer);
+              }
+           }
+        }
+    } while(player->active);
+
+    server->removePlayer(player);
+    pthread_exit(NULL);
+    return false;
 }

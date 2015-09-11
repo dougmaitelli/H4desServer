@@ -681,24 +681,26 @@ bool WorldServer::GM_lvl(Player* estecliente, int lvl) {
         this->serverSendPlayerMessage(estecliente, "You lost %i levels!", -lvl);
     }
     character->SetLevel(character->GetLevel() + lvl);
-    SalvaPlayer(estecliente);
+    this->savePlayer(estecliente);
     return true;
 }
 
 bool WorldServer::GM_exp(Player* estecliente, long int exp) {
+	Character* character = estecliente->getCurrentCharacter();
+
     if (exp > 0) {
-        if (exp > (signed)(EXP_MAX - estecliente->chars[estecliente->chara].exp)) {
-            exp = (EXP_MAX - estecliente->chars[estecliente->chara].exp);
+        if (exp > (signed)(EXP_MAX - character->GetExperience())) {
+            exp = (EXP_MAX - character->GetExperience());
         }
         this->serverSendPlayerMessage(estecliente, "You acquired %i experience points!", exp);
     } else {
-        if ((estecliente->chars[estecliente->chara].exp + exp) <= 0) {
-            exp = -(estecliente->chars[estecliente->chara].exp - 1);
+        if ((character->GetExperience() + exp) <= 0) {
+            exp = -(character->GetExperience() - 1);
         }
         this->serverSendPlayerMessage(estecliente, "You lost %i experiencie points!", -exp);
     }
-    estecliente->chars[estecliente->chara].exp += exp;
-    SalvaPlayer(estecliente);
+    character->SetExperience(character->GetExperience() + exp);
+    this->savePlayer(estecliente);
     return true;
 }
 
@@ -714,7 +716,7 @@ bool WorldServer::GM_gold(Player* estecliente, long int gold) {
         }
         this->serverSendPlayerMessage(estecliente, "You lost %i golds!", -gold);
     }
-    SalvaPlayer(estecliente);
+    this->savePlayer(estecliente);
     estecliente->chars[estecliente->chara].gold += gold;
     return true;
 }
@@ -730,8 +732,8 @@ bool WorldServer::GM_ban(Player* estecliente, char* banid) {
             outrocliente->ban = 1;
             this->serverSendPlayerMessage(estecliente, "Player %i:%s banned", outrocliente->id, outrocliente->usuario);
             this->serverSendPlayerMessage(outrocliente, "You has been banned");
-            SalvaPlayer(outrocliente);
-            DesconectaPlayer(outrocliente);
+            this->savePlayer(outrocliente);
+            this->disconnectPlayer(outrocliente);
             return true;
         } else {
             return false;
@@ -765,7 +767,7 @@ bool WorldServer::GM_kick(Player* estecliente, char* kickid) {
         if (estecliente->perm > outrocliente->perm) {
         	this->serverSendPlayerMessage(estecliente, "Player %i:%s kicked", outrocliente->id, outrocliente->usuario);
 			this->serverSendPlayerMessage(outrocliente, "You has been kicked");
-            DesconectaPlayer(outrocliente);
+            this->disconnectPlayer(outrocliente);
             return true;
         } else {
             return false;
@@ -783,7 +785,7 @@ bool WorldServer::GM_warn(Player* estecliente, char* warnid, int warnnum) {
             outrocliente->warn += warnnum;
             this->serverSendPlayerMessage(estecliente, "The player %i:%s received %i warn points", outrocliente->id, outrocliente->usuario, warnnum);
             this->serverSendPlayerMessage(outrocliente, "You have received %i warn points", warnnum);
-            SalvaPlayer(outrocliente);
+            this->savePlayer(outrocliente);
             return true;
         } else {
             return false;

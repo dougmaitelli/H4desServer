@@ -8,31 +8,34 @@
 #ifndef DATABASE_H
 #define	DATABASE_H
 
-#include "include/pthread/pthread.h"
-#include "include/mysql/mysql.h"
+#include "mysql_driver.h"
+
+#include <cppconn/driver.h>
+#include <cppconn/exception.h>
+#include <cppconn/resultset.h>
+#include <cppconn/statement.h>
+#include <cppconn/prepared_statement.h>
 
 class Database {
-public:
-    Database();
-    virtual ~Database();
-    bool init();
-    bool connect();
-    void close();
-    char* getVersion();
-    MYSQL_RES* execute(char*, ...);
-    void ping();
-    void wait();
-
 private:
     char* host;
     char* username;
     char* password;
     char* database;
-    u_short port;
 
-    pthread_mutex_t MutexSQL;
+    sql::Driver* driver;
+    sql::Connection* con;
 
-    MYSQL* mysql;
+public:
+    Database();
+    virtual ~Database();
+
+    // General
+    bool connect();
+    void close();
+    char* getVersion();
+    void wait();
+    const sql::Connection* getConnection() const;
 };
 
 #endif	/* DATABASE_H */

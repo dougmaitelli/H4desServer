@@ -1,2 +1,8 @@
 .cproject
 .project
+
+*.cbp
+*.depend
+*.layout
+
+obj/

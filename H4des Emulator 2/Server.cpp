@@ -1,12 +1,12 @@
-/* 
+/*
  * File:   Server.cpp
  * Author: DougM
- * 
+ *
  * Created on 4 de Dezembro de 2010, 20:53
  */
 
 #include "Server.h"
-#include "Log.h"
+#include "commom/Log.h"
 #include "Database.h"
 
 Server::Server() {
@@ -20,20 +20,6 @@ Server::~Server() {
 bool Server::initServer() {
     Log::write(LOGO);
 
-    Log::write(LOAD, "[                    ] 0% > Initializing WinSock...");
-    WSADATA w;
-    int error = WSAStartup(MAKEWORD(2, 2), &w);
-    if (error) {
-        WSACleanup();
-        Log::write(MsgType::SERVER_ERROR, "The WinSock initialization failed!");
-        return false;
-    }
-    Log::write(LOAD, "[|                   ] 5% > Verifying WinSock version...");
-    if (w.wVersion != MAKEWORD(2, 2)) {
-        WSACleanup();
-        Log::write(MsgType::SERVER_ERROR, "Invalid WinSock version!");
-        return false;
-    }
     Log::write(LOAD, "[||                  ] 10% > Creating socket...");
     s = socket(AF_INET, SOCK_STREAM, 0);
     if (s == INVALID_SOCKET) {

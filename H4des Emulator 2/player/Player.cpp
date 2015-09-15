@@ -1,7 +1,7 @@
-/* 
+/*
  * File:   Player.cpp
  * Author: DougM
- * 
+ *
  * Created on 4 de Dezembro de 2010, 19:08
  */
 
@@ -13,10 +13,10 @@ Player::Player() {
 Player::~Player() {
 }
 
-const Character*& Player::getCurrentCharacter() const {
+Character* Player::getCurrentCharacter() const {
 	return currentCharacter;
 }
 
-void Player::setCurrentCharacter(Character*& character) {
+void Player::setCurrentCharacter(Character* character) {
 	this->currentCharacter = character;
 }

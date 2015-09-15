@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   PlayerItem.h
  * Author: Douglas Maitelli
  *
@@ -7,6 +7,10 @@
 
 #ifndef PLAYERITEM_H
 #define	PLAYERITEM_H
+
+#include "../assets/Item.h"
+
+class Item;
 
 class PlayerItem {
 private:

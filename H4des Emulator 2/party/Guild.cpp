@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   Guild.cpp
  * Author: Douglas Maitelli
- * 
- * Created on Dezember, 4 2010, 19:54
+ *
+ * Created on December, 4 2010, 19:54
  */
 
 #include "Guild.h"
@@ -17,19 +17,19 @@ unsigned long Guild::getId() const {
 	return id;
 }
 
-const char* Guild::getName() const {
+const string Guild::getName() const {
 	return name;
 }
 
-void Guild::setName(char* name) {
+void Guild::setName(string name) {
 	this->name = name;
 }
 
-const Player*& Guild::getLeader() const {
+Player* Guild::getLeader() const {
 	return leader;
 }
 
-void Guild::setLeader(const Player*& leader) {
+void Guild::setLeader(Player* leader) {
 	this->leader = leader;
 }
 

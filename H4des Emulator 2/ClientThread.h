@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   ClientThread.h
  * Author: DougM
  *
@@ -7,6 +7,10 @@
 
 #ifndef CLIENTTHREAD_H
 #define	CLIENTTHREAD_H
+
+#include "player/Player.h"
+
+class Player;
 
 class ClientThread {
 public:

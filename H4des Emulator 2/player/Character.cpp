@@ -1,7 +1,7 @@
-/* 
+/*
  * File:   Character.cpp
  * Author: DougM
- * 
+ *
  * Created on 4 de Dezembro de 2010, 19:15
  */
 
@@ -255,10 +255,10 @@ void Character::SetSex(Sex sex) {
 Sex Character::GetSex() const {
     return sex;
 }
-void Character::SetName(char* name) {
+void Character::SetName(string name) {
     this->name = name;
 }
-char* Character::GetName() const {
+string Character::GetName() const {
     return name;
 }
 unsigned long Character::GetId() const {

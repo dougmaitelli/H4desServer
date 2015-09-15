@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   Item.h
  * Author: DougM
  *
@@ -7,6 +7,9 @@
 
 #ifndef ITEM_H
 #define	ITEM_H
+
+enum ItemType {
+};
 
 class Item {
 private:

@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   Server.h
- * Author: DougM
+ * Author: Douglas Maitelli
  *
- * Created on 4 de Dezembro de 2010, 20:53
+ * Created on December, 4 2010, 20:53
  */
 
 #ifndef SERVER_H
@@ -10,7 +10,8 @@
 
 #include <pthread.h>
 
-#include "WorldServer.h"
+#include "world/WorldServer.h"
+#include "Database.h"
 
 #define SERVER_NAME "H4des"
 
@@ -27,12 +28,14 @@
 
 using namespace std;
 
+class WorldServer;
+class Database;
+
 class Server {
 private:
     unsigned char EXIT_SERVER_PROCCESS;
-    unsigned char RESTART_SERVER;
 
-    SOCKET s;
+    int s;
     Database* db;
 
     pthread_mutex_t playersMutex;
@@ -43,6 +46,8 @@ private:
 public:
     Server();
     virtual ~Server();
+
+    unsigned char RESTART_SERVER;
 
     pthread_attr_t at;
 
@@ -62,7 +67,7 @@ public:
 
     // Player
     bool resetOnlines();
-    void addPlayer(SOCKET, sockaddr_in*);
+    void addPlayer(int, sockaddr_in*);
     void removePlayer(Player*);
     void disconnectPlayer(Player*);
 };

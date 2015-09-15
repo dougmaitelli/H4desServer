@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   Log.h
- * Author: DougM
+ * Author: Douglas Maitelli
  *
- * Created on 25 de Abril de 2011, 19:57
+ * Created on April, 25 2011, 19:57
  */
 
 #ifndef LOG_H
@@ -12,8 +12,8 @@
 
 #include <iostream>
 #include <stdio.h>
-#include <windows.h>
 #include <string>
+#include <stdarg.h>
 
 using namespace std;
 

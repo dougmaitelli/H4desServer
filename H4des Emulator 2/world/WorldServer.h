@@ -1,33 +1,32 @@
-/* 
+/*
  * File:   WorldServer.h
- * Author: DougM
+ * Author: Douglas Maitelli
  *
- * Created on 4 de Dezembro de 2010, 19:37
+ * Created on December, 4 2010, 19:37
  */
 
 #ifndef WORLDSERVER_H
 #define	WORLDSERVER_H
 
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+
 #include <pthread.h>
 
-#include "Utils.h"
+#include "../commom/Utils.h"
+#include "../Server.h"
+#include "../player/Player.h"
+
+class Utils;
+class Server;
+class Player;
 
 struct Transfer_Data {
     int command;
     string text;
-};
-
-enum Sex {
-    MALE,
-    FEMALE
-};
-
-enum Lang {
-    PT_BR,
-    EN_US
-};
-
-enum ItemType {
 };
 
 class WorldServer {

@@ -1,20 +1,20 @@
-/* 
+/*
  * File:   Database.h
- * Author: DougM
+ * Author: Douglas Maitelli
  *
- * Created on 9 de Dezembro de 2010, 19:06
+ * Created on December, 9 2010, 19:06
  */
 
 #ifndef DATABASE_H
 #define	DATABASE_H
 
-#include "mysql_driver.h"
+//#include "mysql_driver.h"
 
-#include <cppconn/driver.h>
-#include <cppconn/exception.h>
-#include <cppconn/resultset.h>
-#include <cppconn/statement.h>
-#include <cppconn/prepared_statement.h>
+//#include <cppconn/driver.h>
+//#include <cppconn/exception.h>
+//#include <cppconn/resultset.h>
+//#include <cppconn/statement.h>
+//#include <cppconn/prepared_statement.h>
 
 class Database {
 private:
@@ -23,8 +23,8 @@ private:
     char* password;
     char* database;
 
-    sql::Driver* driver;
-    sql::Connection* con;
+    //sql::Driver* driver;
+    //sql::Connection* con;
 
 public:
     Database();
@@ -35,7 +35,7 @@ public:
     void close();
     char* getVersion();
     void wait();
-    const sql::Connection* getConnection() const;
+    //const sql::Connection* getConnection() const;
 };
 
 #endif	/* DATABASE_H */

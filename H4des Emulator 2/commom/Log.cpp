@@ -1,20 +1,18 @@
-/* 
+/*
  * File:   Log.cpp
- * Author: DougM
- * 
- * Created on 25 de Abril de 2011, 19:57
+ * Author: Douglas Maitelli
+ *
+ * Created on April, 25 2011, 19:57
  */
 
 #include "Log.h"
 
 void Log::foregroundColor(int color) {
     __FOREGROUND = color;
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color + (__BACKGROUND << 4));
 }
 
 void Log::backgroundColor(int color) {
     __BACKGROUND = color;
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), __FOREGROUND + (color << 4));
 }
 
 void Log::write(MsgType type, char* text, ...) {
@@ -113,9 +111,9 @@ void Log::write(MsgType type, char* text, ...) {
     }
 
     if (file != NULL) {
-        SYSTEMTIME st;
-        GetSystemTime(&st);
-        fprintf(file, "[%d/%d/%d %d:%d:%d]", st.wDay, st.wMonth, st.wYear, st.wHour, st.wMinute, st.wSecond);
+        time_t t = time(0);
+        struct tm* now = localtime(&t);
+        fprintf(file, "[%d/%d/%d %d:%d:%d]", now->tm_year, now->tm_mon, now->tm_mday, now->tm_hour, now->tm_min, now->tm_sec);
         fprintf(file, textC);
         fputc('\n', file);
         fclose(file);

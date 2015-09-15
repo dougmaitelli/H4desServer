@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   Player.h
  * Author: DougM
  *
@@ -8,11 +8,16 @@
 #ifndef PLAYER_H
 #define	PLAYER_H
 
+#include <netinet/in.h>
+
+#include "Character.h"
+
+class Character;
+
 class Player {
 private:
     unsigned long id;
     char user[100];
-    Lang lang;
     unsigned int warn;
     unsigned short perm;
     unsigned char ban;
@@ -24,16 +29,16 @@ public:
     Player();
     virtual ~Player();
 
-	SOCKET socket;
+	int socket;
 	sockaddr_in sockeAddr;
 	char ip[16];
 	char subnet[12];
 	bool active;
 
-    const Character*& getCurrentCharacter() const;
-    void setCurrentCharacter(Character*&);
-    
-    SOCKET getSocket() const;
+    Character* getCurrentCharacter() const;
+    void setCurrentCharacter(Character*);
+
+    int getSocket() const;
     char* getIp() const;
     char* getSubnet() const;
 };

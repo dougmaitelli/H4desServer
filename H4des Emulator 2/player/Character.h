@@ -1,20 +1,38 @@
-/* 
+/*
  * File:   Character.h
- * Author: DougM
+ * Author: Douglas Maitelli
  *
- * Created on 4 de Dezembro de 2010, 19:15
+ * Created on Decembro, 4 2010, 19:15
  */
 
 #ifndef CHARACTER_H
 #define	CHARACTER_H
 
+#include <string>
+#include <vector>
+
+#include "PlayerItem.h"
+#include "../assets/Skill.h"
+#include "../party/Party.h"
+#include "../party/Guild.h"
+
 using namespace std;
+
+class PlayerItem;
+class Skill;
+class Party;
+class Guild;
+
+enum Sex {
+    MALE,
+    FEMALE
+};
 
 class Character {
 private:
     // General
     unsigned long id;
-    char name[20];
+    string name;
     Sex sex;
     unsigned short level;
     unsigned long experience;
@@ -83,8 +101,8 @@ public:
 
     // General
     unsigned long GetId() const;
-    char* GetName() const;
-    void SetName(char*);
+    string GetName() const;
+    void SetName(string);
     Sex GetSex() const;
     void SetSex(Sex sex);
     unsigned short GetLevel() const;

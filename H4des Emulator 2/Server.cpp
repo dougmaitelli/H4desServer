@@ -320,7 +320,7 @@ bool Server::loadGuilds() {
 }
 
 void Server::serverLoop() {
-    int novocliente;
+    int newClient;
     sockaddr_in	cliente_sock;
     socklen_t addr_size = sizeof(sockaddr_in);
     fd_set fds;

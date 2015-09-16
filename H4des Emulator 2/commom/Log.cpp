@@ -7,82 +7,94 @@
 
 #include "Log.h"
 
-void Log::foregroundColor(int color) {
-    __FOREGROUND = color;
-    //TODO: Color Support on Linux
-}
+string Log::getColorCode(Color foreground = NONE, Color background = NONE) {
+    char num_s[3];
+    string s = "\033[";
 
-void Log::backgroundColor(int color) {
-    __BACKGROUND = color;
-    //TODO: Color Support on Linux
+    if (!foreground && !background) s += "0";
+
+    if (foreground) {
+        sprintf(num_s, "%d", 29 + foreground);
+        s += num_s;
+
+        if (background) s += ";";
+    }
+
+    if (background) {
+        sprintf(num_s, "%d", 39 + background);
+        s += num_s;
+    }
+
+    return s + "m";
 }
 
 void Log::write(MsgType type, char* text, ...) {
-    pthread_mutex_lock(&mutexLOG);
     va_list ap;
     va_start(ap, text);
     char* textF;
     vsprintf(textF, text, ap);
     va_end(ap);
 
+    Color color = NONE;
+
     char* textC;
     switch (type) {
         case LOGO:
-            foregroundColor(RED);
-            printf("               /-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\\ \n");
-            printf("              /      ___ ___    _____     .___                  \\ \n");
-            printf("              <     /   |   \\  /  |  |  __| _/____   ______     > \n");
-            printf("              <    /    ~    \\/   |  |_/ __ |/ __ \\ /  ___/     > \n");
-            printf("              <    \\    Y    /    ^   / /_/ \\  ___/ \\___ \\      > \n");
-            printf("              <     \\___|_  /\\____   |\\____ |\\___  >____  >     > \n");
-            printf("              <           \\/      |__|     \\/    \\/     \\/      > \n");
-            printf("              <               E  M  U  L  A  T  O  R            > \n");
-            printf("              \\             U  N  I  T     T  E  A  M           / \n");
-            printf("               \\-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-/ \n\n");
+            cout << getColorCode(RED);
+            cout << "               /-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\\" << endl;
+            cout << "              /      ___ ___    _____     .___                  \\" << endl;
+            cout << "              <     /   |   \\  /  |  |  __| _/____   ______     >" << endl;
+            cout << "              <    /    ~    \\/   |  |_/ __ |/ __ \\ /  ___/     >" << endl;
+            cout << "              <    \\    Y    /    ^   / /_/ \\  ___/ \\___ \\      >" << endl;
+            cout << "              <     \\___|_  /\\____   |\\____ |\\___  >____  >     >" << endl;
+            cout << "              <           \\/      |__|     \\/    \\/     \\/      >" << endl;
+            cout << "              <               E  M  U  L  A  T  O  R            >" << endl;
+            cout << "              \\             U  N  I  T     T  E  A  M           /" << endl;
+            cout << "               \\-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-/" << endl;
             break;
         case SHOW_MSG:
-            foregroundColor(GRAY);
             textC = textF;
             break;
         case SQL_ERROR:
-            foregroundColor(PURPLE);
+            color = MAGENTA;
             sprintf(textC, "[SQL ERROR]: %s", textF);
             break;
         case SERVER_ERROR:
-            foregroundColor(RED);
+            color = RED;
             sprintf(textC, "[SERVER ERROR]: %s", textF);
             break;
         case WARNING:
-            foregroundColor(YELLOW);
+            color = YELLOW;
             sprintf(textC, "[WARNING]: %s", textF);
             break;
         case SYSTEM:
-            foregroundColor(GREEN);
+            color = GREEN;
             sprintf(textC, "[SYSTEM]: %s", textF);
             break;
         case ADM_ACTION:
-            foregroundColor(BLUE);
+            color = BLUE;
             sprintf(textC, "[ADM ACTION]: %s", textF);
             break;
         case GM_ACTION:
-            foregroundColor(YELLOW);
+            color = YELLOW;
             sprintf(textC, "[GM ACTION]: %s", textF);
             break;
         case LOAD:
-            foregroundColor(TURQUEY);
+            color = CYAN;
             sprintf(textC, "[LOADING]: %s", textF);
             break;
         case HACK:
-            foregroundColor(RED);
+            color = RED;
             sprintf(textC, "[HACK]: %s", textF);
             break;
         case CLIENT:
-            foregroundColor(TURQUEY);
+            color = CYAN;
             sprintf(textC, "[CLIENT]: %s", textF);
             break;
     }
-    cout << textC << endl;
-    foregroundColor(WHITE);
+    printColor(color, textC);
+
+    pthread_mutex_lock(&mutexLOG);
 
     FILE* file;
     switch (type) {
@@ -122,4 +134,8 @@ void Log::write(MsgType type, char* text, ...) {
     }
 
     pthread_mutex_unlock(&mutexLOG);
+}
+
+void Log::printColor(Color color, string text){
+    cout << getColorCode(color) << text << endl;
 }

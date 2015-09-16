@@ -234,11 +234,11 @@ void Character::SetHp(unsigned int hp) {
 unsigned int Character::GetHp() const {
     return hp;
 }
-void Character::SetMoney(unsigned long money) {
-    this->money = money;
+void Character::SetGold(unsigned long gold) {
+    this->gold = gold;
 }
-unsigned long Character::GetMoney() const {
-    return money;
+unsigned long Character::GetGold() const {
+    return gold;
 }
 void Character::SetExperience(unsigned long experience) {
     this->experience = experience;

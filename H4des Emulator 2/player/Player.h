@@ -21,9 +21,9 @@ private:
     Server* server;
 
     unsigned long id;
-    char user[100];
-    unsigned int warn;
-    unsigned short perm;
+    string username;
+    unsigned short permissionLevel;
+    unsigned short warnLevel;
     unsigned char ban;
     unsigned char hide;
 
@@ -40,6 +40,17 @@ public:
 	bool active;
 
 	Server* getServer() const;
+
+    unsigned long getId() const;
+    string getUsername() const;
+	unsigned short getPermissionLevel() const;
+	void setPermissionLevel(unsigned short);
+	unsigned short getWarnLevel() const;
+	void setWarnLevel(unsigned short);
+	unsigned char getBan() const;
+	void setBan(unsigned char);
+	unsigned char getHide() const;
+	void setHide(unsigned char);
 
     Character* getCurrentCharacter() const;
     void setCurrentCharacter(Character*);

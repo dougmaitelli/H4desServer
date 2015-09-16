@@ -36,7 +36,7 @@ private:
     Sex sex;
     unsigned short level;
     unsigned long experience;
-    unsigned long money;
+    unsigned long gold;
     unsigned int hp;
     unsigned int mp;
     unsigned int hp_max;
@@ -104,102 +104,102 @@ public:
     string GetName() const;
     void SetName(string);
     Sex GetSex() const;
-    void SetSex(Sex sex);
+    void SetSex(Sex);
     unsigned short GetLevel() const;
-    void SetLevel(unsigned short level);
+    void SetLevel(unsigned short);
     unsigned long GetExperience() const;
-    void SetExperience(unsigned long experience);
-    unsigned long GetMoney() const;
-    void SetMoney(unsigned long money);
+    void SetExperience(unsigned long);
+    unsigned long GetGold() const;
+    void SetGold(unsigned long);
     unsigned int GetHp() const;
-    void SetHp(unsigned int hp);
+    void SetHp(unsigned int);
     unsigned int GetMp() const;
-    void SetMp(unsigned int mp);
+    void SetMp(unsigned int);
     unsigned int GetHp_max() const;
-    void SetHp_max(unsigned int hp_max);
+    void SetHp_max(unsigned int);
     unsigned int GetMp_max() const;
-    void SetMp_max(unsigned int mp_max);
+    void SetMp_max(unsigned int);
 
     unsigned short GetNation() const;
-    void SetNation(unsigned short nation);
+    void SetNation(unsigned short);
     unsigned short GetRace() const;
-    void SetRace(unsigned short race);
+    void SetRace(unsigned short);
     unsigned short GetProfession() const;
-    void SetProfession(unsigned short profession);
+    void SetProfession(unsigned short);
 
     // Items
 	vector<PlayerItem*> GetItems() const;
 
     // Equipments
     PlayerItem* GetWeapon() const;
-    void SetWeapon(PlayerItem* weapon);
+    void SetWeapon(PlayerItem*);
     PlayerItem* GetSecond_weapon() const;
-    void SetSecond_weapon(PlayerItem* second_weapon);
+    void SetSecond_weapon(PlayerItem*);
     PlayerItem* GetHead() const;
-    void SetHead(PlayerItem* head);
+    void SetHead(PlayerItem*);
     PlayerItem* GetArmor() const;
-    void SetArmor(PlayerItem* armor);
+    void SetArmor(PlayerItem*);
     PlayerItem* GetHands() const;
-    void SetHands(PlayerItem* hands);
+    void SetHands(PlayerItem*);
     PlayerItem* GetFeets() const;
-    void SetFeets(PlayerItem* feets);
+    void SetFeets(PlayerItem*);
     PlayerItem* GetLegs() const;
-    void SetLegs(PlayerItem* legs);
+    void SetLegs(PlayerItem*);
     PlayerItem* GetBelt() const;
-    void SetBelt(PlayerItem* belt);
+    void SetBelt(PlayerItem*);
     PlayerItem* GetRobe() const;
-    void SetRobe(PlayerItem* robe);
+    void SetRobe(PlayerItem*);
 
     // Attributes
     unsigned short GetStrength() const;
-    void SetStrength(unsigned short strength);
+    void SetStrength(unsigned short);
     unsigned short GetWisdom() const;
-    void SetWisdom(unsigned short wisdom);
+    void SetWisdom(unsigned short);
     unsigned short GetHealth() const;
-    void SetHealth(unsigned short health);
+    void SetHealth(unsigned short);
     unsigned short GetPerception() const;
-    void SetPerception(unsigned short perception);
+    void SetPerception(unsigned short);
     unsigned short GetCharisma() const;
-    void SetCharisma(unsigned short charisma);
+    void SetCharisma(unsigned short);
     unsigned short GetDexterity() const;
-    void SetDexterity(unsigned short dexterity);
+    void SetDexterity(unsigned short);
     unsigned short GetAgility() const;
-    void SetAgility(unsigned short agility);
+    void SetAgility(unsigned short);
     unsigned short GetMagic() const;
-    void SetMagic(unsigned short magic);
+    void SetMagic(unsigned short);
     unsigned short GetStamina() const;
-    void SetStamina(unsigned short stamina);
+    void SetStamina(unsigned short);
 
     // Skills
     vector<Skill*> GetSkills() const;
 
     // Points
     unsigned short GetAttribute_points() const;
-    void SetAttribute_points(unsigned short attribute_points);
+    void SetAttribute_points(unsigned short);
     unsigned short GetSkill_points() const;
-    void SetSkill_points(unsigned short skill_points);
+    void SetSkill_points(unsigned short);
 
     // Social
     Party* GetParty() const;
-    void SetParty(Party* party);
+    void SetParty(Party*);
     Guild* GetGuild() const;
-    void SetGuild(Guild* guild);
+    void SetGuild(Guild*);
 
     // Position
     unsigned short GetMap() const;
-    void SetMap(unsigned short map);
+    void SetMap(unsigned short);
     float GetX() const;
-    void SetX(float x);
+    void SetX(float);
     float GetY() const;
-    void SetY(float y);
+    void SetY(float);
 
     // Save Point
     unsigned short GetSave_map() const;
-    void SetSave_map(unsigned short save_map);
+    void SetSave_map(unsigned short);
     float GetSave_x() const;
-    void SetSave_x(float save_x);
+    void SetSave_x(float);
     float GetSave_y() const;
-    void SetSave_y(float save_y);
+    void SetSave_y(float);
 
     // Friends
     vector<Player*> GetFriends() const;

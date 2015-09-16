@@ -14,9 +14,12 @@
 #include <netinet/in.h>
 #include <netinet/tcp.h>
 
-#include <pthread.h>
+#include <stdlib.h>
+#include <stdarg.h>
 #include <vector>
+#include <pthread.h>
 
+#include "../commom/Log.h"
 #include "../commom/Utils.h"
 #include "../Server.h"
 #include "../player/Player.h"
@@ -25,6 +28,7 @@
 
 using namespace std;
 
+class Log;
 class Utils;
 class Server;
 class Player;
@@ -123,50 +127,50 @@ public:
     bool gmCmd(Player*, string);
     void gmLog(Player*, string, string, ...);
 
-	bool GM_lvl(Player* estecliente, int lvl);
-	bool GM_exp(Player* estecliente, long int exp);
-	bool GM_gold(Player* estecliente, long int gold);
-	bool GM_item(Player* estecliente, unsigned int itemid, unsigned int itemammount);
-	bool GM_ban(Player* estecliente, char* banid);
-	bool GM_unban(Player* estecliente, char* unbanid);
-	bool GM_kick(Player* estecliente, char* kickid);
-	bool GM_warn(Player* estecliente, char* warnid, int warnnum);
-	bool GM_go(Player* estecliente, unsigned int goid, float gox, float goy);
-	bool GM_buff(Player* estecliente);
-	bool GM_buy(Player* estecliente);
-	bool GM_restart(Player* estecliente);
-	bool GM_reloaditem(Player* estecliente);
-	bool GM_reloadnpc(Player* estecliente);
-	bool GM_reloadmonster(Player* estecliente);
-	bool GM_reloadquest(Player* estecliente);
-	bool GM_reloadskill(Player* estecliente);
-	bool GM_reloadguild(Player* estecliente);
-	bool GM_tempo(Player* estecliente, char* tempoid);
-	bool GM_repair(Player* estecliente);
-	bool GM_summon(Player* estecliente, unsigned int summonid);
-	bool GM_clear(Player* estecliente);
-	bool GM_call(Player* estecliente, char* callid);
-	bool GM_heal(Player* estecliente);
-	bool GM_hide(Player* estecliente);
-	bool GM_maxstat(Player* estecliente);
-	bool GM_maxhab(Player* estecliente);
-	bool GM_who(Player* estecliente, char* whoid);
-	bool GM_guildlvl(Player* estecliente, int lvl);
-	bool GM_msg(Player* estecliente, char* msg);
-	bool GM_save(Player* estecliente);
+	bool GM_lvl(Player*, int);
+	bool GM_exp(Player*, long int);
+	bool GM_gold(Player*, long int);
+	bool GM_item(Player*, unsigned int, unsigned int itemammount);
+	bool GM_ban(Player*, char*);
+	bool GM_unban(Player*, char*);
+	bool GM_kick(Player*, char*);
+	bool GM_warn(Player*, char*, int);
+	bool GM_go(Player*, unsigned int, float, float);
+	bool GM_buff(Player*);
+	bool GM_buy(Player*);
+	bool GM_restart(Player*);
+	bool GM_reloaditem(Player*);
+	bool GM_reloadnpc(Player*);
+	bool GM_reloadmonster(Player*);
+	bool GM_reloadquest(Player*);
+	bool GM_reloadskill(Player*);
+	bool GM_reloadguild(Player*);
+	bool GM_tempo(Player*, char*);
+	bool GM_repair(Player*);
+	bool GM_summon(Player*, unsigned int);
+	bool GM_clear(Player*);
+	bool GM_call(Player*, char*);
+	bool GM_heal(Player*);
+	bool GM_hide(Player*);
+	bool GM_maxstat(Player*);
+	bool GM_maxhab(Player*);
+	bool GM_who(Player*, char*);
+	bool GM_guildlvl(Player*, int);
+	bool GM_msg(Player*, string);
+	bool GM_save(Player*);
 	//------------------------------------------------------------------------
-	bool GM_A_lvl(Player* estecliente, char* player, int lvl);
-	bool GM_A_exp(Player* estecliente, char* player, long int exp);
-	bool GM_A_gold(Player* estecliente, char* player, long int gold);
-	bool GM_A_item(Player* estecliente, char* player, unsigned int itemid);
-	bool GM_A_go(Player* estecliente, char* player, unsigned int goid, float gox, float goy);
-	bool GM_A_buff(Player* estecliente, char* player);
-	bool GM_A_repair(Player* estecliente, char* player);
-	bool GM_A_heal(Player* estecliente, char* player);
-	bool GM_A_maxstat(Player* estecliente, char* player);
-	bool GM_A_maxhab(Player* estecliente, char* player);
-	bool GM_A_guildlvl(Player* estecliente, char* player, int lvl);
-	bool GM_A_save(Player* estecliente, char* player);
+	bool GM_A_lvl(Player*, char*, int);
+	bool GM_A_exp(Player*, char*, long int);
+	bool GM_A_gold(Player*, char*, long int);
+	bool GM_A_item(Player*, char*, unsigned int);
+	bool GM_A_go(Player*, char*, unsigned int, float, float);
+	bool GM_A_buff(Player*, char*);
+	bool GM_A_repair(Player*, char*);
+	bool GM_A_heal(Player*, char*);
+	bool GM_A_maxstat(Player*, char*);
+	bool GM_A_maxhab(Player*, char*);
+	bool GM_A_guildlvl(Player*, char*, int);
+	bool GM_A_save(Player*, char*);
 
 	// Player
 	void savePlayer(Player*);

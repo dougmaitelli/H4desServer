@@ -14,12 +14,12 @@ void WorldServer::serverSendAllMessage(string message, ...) {
     for (unsigned int i = 0; i < players.size(); i++) {
         Player* toPlayer = players.at(i);
 
-        if (estecliente->logado) {
+        //if (estecliente->logado) {
             Transfer_Data data;
-			vsprintf(data.char1, message.c_str(), ap);
-            data.comando = 2;
+			//vsprintf(data.text, message.c_str(), ap);
+            data.command = 2;
             send(toPlayer->getSocket(), (char*) &data, sizeof (data), 0);
-        }
+        //}
     }
 
     va_end(ap);
@@ -30,8 +30,8 @@ void WorldServer::serverSendPlayerMessage(Player* player, string message, ...) {
     va_start(ap, message);
 
     Transfer_Data data;
-    vsprintf(data.char1, message.c_str(), ap);
-    data.comando = 2;
+    //vsprintf(data.text, message.c_str(), ap);
+    data.command = 2;
     send(player->getSocket(), (char*) &data, sizeof (data), 0);
 
     va_end(ap);
@@ -47,8 +47,8 @@ void WorldServer::serverSendGuildMessage(Guild* guild, string message, ...) {
 		Player* guildPlayer = guildMembers.at(i);
 
 		Transfer_Data data;
-		vsprintf(data.char1, message.c_str(), ap);
-		data.comando = 2;
+		//vsprintf(data.text, message.c_str(), ap);
+		data.command = 2;
 		send(guildPlayer->getSocket(), (char*) &data, sizeof (data), 0);
     }
 
@@ -65,8 +65,8 @@ void WorldServer::serverSendPartyMessage(Party* party, string message, ...) {
 		Player* partyPlayer = partyMembers.at(i);
 
 		Transfer_Data data;
-		vsprintf(data.char1, message.c_str(), ap);
-		data.comando = 2;
+		//vsprintf(data.text, message.c_str(), ap);
+		data.command = 2;
 		send(partyPlayer->getSocket(), (char*) &data, sizeof (data), 0);
 	}
 
@@ -79,12 +79,12 @@ void WorldServer::serverMessage(Player* player, string message) {
     for (unsigned int i = 0; i < players.size(); i++) {
 		Player* toPlayer = players.at(i);
 
-		if (estecliente->logado) {
+		//if (estecliente->logado) {
 			Transfer_Data data;
-			sprintf(data.char1, "%s :> %s", character->GetName(), message);
-			data.comando = 2;
+			//sprintf(data.text, "%s :> %s", character->GetName(), message);
+			data.command = 2;
 			send(toPlayer->getSocket(), (char*) &data, sizeof (data), 0);
-		}
+		//}
 	}
 }
 
@@ -95,8 +95,8 @@ void WorldServer::chatMessage(Player* player, string message) {
 		Player* toPlayer = players.at(i);
 
 		Transfer_Data data;
-		sprintf(data.char1, "%s :> %s", character->GetName(), message);
-		data.comando = 1;
+		//sprintf(data.text, "%s :> %s", character->GetName(), message);
+		data.command = 1;
 		send(toPlayer->getSocket(), (char*) &data, sizeof (data), 0);
 	}
 }
@@ -106,8 +106,8 @@ bool WorldServer::privateMessage(Player* player, Player* toPlayer, string messag
 
     if (toPlayer != NULL) {
         Transfer_Data data;
-        sprintf(data.char1, "%s :> %s", character->GetName(), message);
-        data.comando = 3;
+        //sprintf(data.text, "%s :> %s", character->GetName(), message);
+        data.command = 3;
         send(toPlayer->getSocket(), (char*) &data, sizeof (data), 0);
         return true;
     } else {
@@ -125,8 +125,8 @@ void WorldServer::guildMessage(Player* player, string message) {
 		Player* guildPlayer = guildMembers.at(i);
 
 		Transfer_Data data;
-		sprintf(data.char1, "%s :> %s", character->GetName(), message);
-		data.comando = 4;
+		//sprintf(data.text, "%s :> %s", character->GetName(), message);
+		data.command = 4;
 		send(guildPlayer->getSocket(), (char*) &data, sizeof (data), 0);
 	}
 }
@@ -141,8 +141,8 @@ void WorldServer::partyMessage(Player* player, string message) {
     	Player* partyPlayer = partyMembers.at(i);
 
 		Transfer_Data data;
-		sprintf(data.char1, "%s :> %s", character->GetName(), message);
-		data.comando = 5;
+		//sprintf(data.text, "%s :> %s", character->GetName(), message);
+		data.command = 5;
 		send(partyPlayer->getSocket(), (char*) &data, sizeof (data), 0);
     }
 }

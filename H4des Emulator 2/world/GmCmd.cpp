@@ -10,16 +10,17 @@
 //TODO: Change strtok usage to strtok_r and review current commands
 
 bool WorldServer::gmCmd(Player* player, string command) {
+    char* savePtr;
     char* cmdo;
-    cmdo = strtok(command.c_str(), " ,.");
+    cmdo = strtok_r(strdup(command.c_str()), " ,.", &savePtr);
     if (cmdo == NULL) {
 		this->serverSendPlayerMessage(player, "Invalid command");
         return false;
     } else if (strcmp(cmdo, "/lvl") == 0) {
-        if (player->perm < LVL_PERM) {
+        if (player->getPermissionLevel() < LVL_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
 			this->serverSendPlayerMessage(player, "The correct syntax is /lvl number");
             return false;
         }
@@ -31,10 +32,10 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/exp") == 0) {
-        if (player->perm < EXP_PERM) {
+        if (player->getPermissionLevel() < EXP_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
 			this->serverSendPlayerMessage(player, "The correct syntax is /exp number");
             return false;
         }
@@ -46,10 +47,10 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/gold") == 0) {
-        if (player->perm < GOLD_PERM) {
+        if (player->getPermissionLevel() < GOLD_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
 			this->serverSendPlayerMessage(player, "The correct syntax is /gold number");
             return false;
         }
@@ -61,15 +62,15 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/item") == 0) {
-        if (player->perm < ITEM_PERM) {
+        if (player->getPermissionLevel() < ITEM_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
 			this->serverSendPlayerMessage(player, "The correct syntax is /item item_id item_ammount");
             return false;
         }
         int itemid = atoi(cmdo);
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
 			this->serverSendPlayerMessage(player, "The correct syntax is /item item_id item_ammount");
             return false;
         }
@@ -81,10 +82,10 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/ban") == 0) {
-        if (player->perm < BAN_PERM) {
+        if (player->getPermissionLevel() < BAN_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
 			this->serverSendPlayerMessage(player, "The correct syntax is /ban player_name");
             return false;
         }
@@ -96,10 +97,10 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/unban") == 0) {
-        if (player->perm < UNBAN_PERM) {
+        if (player->getPermissionLevel() < UNBAN_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
 			this->serverSendPlayerMessage(player, "The correct syntax is /unban player_name");
             return false;
         }
@@ -111,10 +112,10 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/kick") == 0) {
-        if (player->perm < KICK_PERM) {
+        if (player->getPermissionLevel() < KICK_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
 			this->serverSendPlayerMessage(player, "The correct syntax is /kick player_name");
             return false;
         }
@@ -126,15 +127,15 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/warn") == 0) {
-        if (player->perm < WARN_PERM) {
+        if (player->getPermissionLevel() < WARN_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
 			this->serverSendPlayerMessage(player, "The correct syntax is /warn player_name number");
             return false;
         }
         char* warnid = cmdo;
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
 			this->serverSendPlayerMessage(player, "The correct syntax is /warn player_name number");
             return false;
         }
@@ -146,20 +147,20 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/go") == 0) {
-        if (player->perm < GO_PERM) {
+        if (player->getPermissionLevel() < GO_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
 			this->serverSendPlayerMessage(player, "The correct syntax is /go map_id");
             return false;
         }
         int goid = atoi(cmdo);
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
 			this->serverSendPlayerMessage(player, "The correct syntax is /go map_id x y");
             return false;
         }
         float gox = atoi(cmdo);
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
 			this->serverSendPlayerMessage(player, "The correct syntax is /go map_id x y");
             return false;
         }
@@ -171,7 +172,7 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/buff") == 0) {
-        if (player->perm < BUFF_PERM) {
+        if (player->getPermissionLevel() < BUFF_PERM) {
             return false;
         }
         if (GM_buff(player)) {
@@ -181,7 +182,7 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/buy") == 0) {
-        if (player->perm < BUY_PERM) {
+        if (player->getPermissionLevel() < BUY_PERM) {
             return false;
         }
         if (GM_buy(player)) {
@@ -191,7 +192,7 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/restart_server") == 0) {
-        if (player->perm < RESTART_PERM) {
+        if (player->getPermissionLevel() < RESTART_PERM) {
             return false;
         }
         if (GM_restart(player)) {
@@ -201,7 +202,7 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/reload_item") == 0) {
-        if (player->perm < RELOADITEM_PERM) {
+        if (player->getPermissionLevel() < RELOADITEM_PERM) {
             return false;
         }
         if (GM_reloaditem(player)) {
@@ -211,7 +212,7 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/reload_npc") == 0) {
-        if (player->perm < RELOADNPC_PERM) {
+        if (player->getPermissionLevel() < RELOADNPC_PERM) {
             return false;
         }
         if (GM_reloadnpc(player)) {
@@ -221,7 +222,7 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/reload_monster") == 0) {
-        if (player->perm < RELOADMONSTER_PERM) {
+        if (player->getPermissionLevel() < RELOADMONSTER_PERM) {
             return false;
         }
         if (GM_reloadmonster(player)) {
@@ -231,7 +232,7 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/reload_quest") == 0) {
-        if (player->perm < RELOADQUEST_PERM) {
+        if (player->getPermissionLevel() < RELOADQUEST_PERM) {
             return false;
         }
         if (GM_reloadquest(player)) {
@@ -241,7 +242,7 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/reload_skill") == 0) {
-        if (player->perm < RELOADSKILL_PERM) {
+        if (player->getPermissionLevel() < RELOADSKILL_PERM) {
             return false;
         }
         if (GM_reloadskill(player)) {
@@ -251,7 +252,7 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/reload_guild") == 0) {
-        if (player->perm < RELOADGUILD_PERM) {
+        if (player->getPermissionLevel() < RELOADGUILD_PERM) {
             return false;
         }
         if (GM_reloadguild(player)) {
@@ -261,10 +262,10 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/tempo") == 0) {
-        if (player->perm < TEMPO_PERM) {
+        if (player->getPermissionLevel() < TEMPO_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
 			this->serverSendPlayerMessage(player, "The correct syntax is /tempo name");
             return false;
         }
@@ -276,7 +277,7 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/repair") == 0) {
-        if (player->perm < REPAIR_PERM) {
+        if (player->getPermissionLevel() < REPAIR_PERM) {
             return false;
         }
         if (GM_repair(player)) {
@@ -286,10 +287,10 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/summon") == 0) {
-        if (player->perm < SUMMON_PERM) {
+        if (player->getPermissionLevel() < SUMMON_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is /summon monster_id");
             return false;
         }
@@ -301,7 +302,7 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/clear_map") == 0) {
-        if (player->perm < CLEAR_PERM) {
+        if (player->getPermissionLevel() < CLEAR_PERM) {
             return false;
         }
         if (GM_clear(player)) {
@@ -311,10 +312,10 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/call") == 0) {
-        if (player->perm < CALL_PERM) {
+        if (player->getPermissionLevel() < CALL_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is /call player_name");
             return false;
         }
@@ -326,7 +327,7 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/heal") == 0) {
-        if (player->perm < HEAL_PERM) {
+        if (player->getPermissionLevel() < HEAL_PERM) {
             return false;
         }
         if (GM_heal(player)) {
@@ -336,7 +337,7 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/hide") == 0) {
-        if (player->perm < HIDE_PERM) {
+        if (player->getPermissionLevel() < HIDE_PERM) {
             return false;
         }
         if (GM_hide(player)) {
@@ -346,7 +347,7 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/max_stats") == 0) {
-        if (player->perm < MAXSTAT_PERM) {
+        if (player->getPermissionLevel() < MAXSTAT_PERM) {
             return false;
         }
         if (GM_maxstat(player)) {
@@ -356,7 +357,7 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/max_hab") == 0) {
-        if (player->perm < MAXHAB_PERM) {
+        if (player->getPermissionLevel() < MAXHAB_PERM) {
             return false;
         }
         if (GM_maxhab(player)) {
@@ -366,10 +367,10 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/who") == 0) {
-        if (player->perm < WHO_PERM) {
+        if (player->getPermissionLevel() < WHO_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is /who player_name");
             return false;
         }
@@ -381,10 +382,10 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/guild_lvl") == 0) {
-        if (player->perm < GUILDLVL_PERM) {
+        if (player->getPermissionLevel() < GUILDLVL_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is /guild_lvl number");
             return false;
         }
@@ -396,15 +397,14 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/msg") == 0) {
-        if (player->perm < MSG_PERM) {
+        if (player->getPermissionLevel() < MSG_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is /msg text");
             return false;
         }
-        char* msg = command;
-        CortaStr(msg, 5);
+        string msg = command.substr(5);
         if (GM_msg(player, msg)) {
             gmLog(player, command, "\"/msg %s\"", msg);
             return true;
@@ -412,7 +412,7 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "/save") == 0) {
-        if (player->perm < SAVE_PERM) {
+        if (player->getPermissionLevel() < SAVE_PERM) {
             return false;
         }
         if (GM_save(player)) {
@@ -423,15 +423,15 @@ bool WorldServer::gmCmd(Player* player, string command) {
         }
         //------------------------------------------------------------------------------
     } else if (strcmp(cmdo, "#lvl") == 0) {
-        if (player->perm < A_LVL_PERM) {
+        if (player->getPermissionLevel() < A_LVL_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #lvl player_name number");
             return false;
         }
         char* playerName = cmdo;
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #lvl player_name number");
             return false;
         }
@@ -443,15 +443,15 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "#exp") == 0) {
-        if (player->perm < A_EXP_PERM) {
+        if (player->getPermissionLevel() < A_EXP_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #exp player_name number");
             return false;
         }
         char* playerName = cmdo;
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #exp player_name number");
             return false;
         }
@@ -463,15 +463,15 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "#gold") == 0) {
-        if (player->perm < A_GOLD_PERM) {
+        if (player->getPermissionLevel() < A_GOLD_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #gold player_name number");
             return false;
         }
         char* playerName = cmdo;
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #gold player_name number");
             return false;
         }
@@ -483,15 +483,15 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "#item") == 0) {
-        if (player->perm < A_ITEM_PERM) {
+        if (player->getPermissionLevel() < A_ITEM_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #item player_name item_id");
             return false;
         }
         char* playerName = cmdo;
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #item player_name item_id");
             return false;
         }
@@ -503,25 +503,25 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "#go") == 0) {
-        if (player->perm < A_GO_PERM) {
+        if (player->getPermissionLevel() < A_GO_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #go player_name map_id x y");
             return false;
         }
         char* playerName = cmdo;
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #go player_name map_id x y");
             return false;
         }
         int goid = atoi(cmdo);
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #go player_name map_id x y");
             return false;
         }
         int gox = atoi(cmdo);
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #go player_name map_id x y");
             return false;
         }
@@ -533,10 +533,10 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "#buff") == 0) {
-        if (player->perm < A_BUFF_PERM) {
+        if (player->getPermissionLevel() < A_BUFF_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #buff player_name");
             return false;
         }
@@ -548,10 +548,10 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "#repair") == 0) {
-        if (player->perm < A_REPAIR_PERM) {
+        if (player->getPermissionLevel() < A_REPAIR_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #repair player_name");
             return false;
         }
@@ -563,10 +563,10 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "#heal") == 0) {
-        if (player->perm < A_HEAL_PERM) {
+        if (player->getPermissionLevel() < A_HEAL_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #heal player_name");
             return false;
         }
@@ -578,10 +578,10 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "#max_stats") == 0) {
-        if (player->perm < A_MAXSTAT_PERM) {
+        if (player->getPermissionLevel() < A_MAXSTAT_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #max_stats player_name");
             return false;
         }
@@ -593,10 +593,10 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "#max_hab") == 0) {
-        if (player->perm < A_MAXHAB_PERM) {
+        if (player->getPermissionLevel() < A_MAXHAB_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #max_hab player_name");
             return false;
         }
@@ -608,15 +608,15 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "#guild_lvl") == 0) {
-        if (player->perm < A_GUILDLVL_PERM) {
+        if (player->getPermissionLevel() < A_GUILDLVL_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #guild_lvl player_name number");
             return false;
         }
         char* playerName = cmdo;
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #guild_lvl player_name number");
             return false;
         }
@@ -628,10 +628,10 @@ bool WorldServer::gmCmd(Player* player, string command) {
             return false;
         }
     } else if (strcmp(cmdo, "#save") == 0) {
-        if (player->perm < A_SAVE_PERM) {
+        if (player->getPermissionLevel() < A_SAVE_PERM) {
             return false;
         }
-        if ((cmdo = strtok(NULL, " ,.")) == NULL) {
+        if ((cmdo = strtok_r(NULL, " ,.", &savePtr)) == NULL) {
         	this->serverSendPlayerMessage(player, "The correct syntax is #save player_name");
             return false;
         }
@@ -657,10 +657,10 @@ void WorldServer::gmLog(Player* player, string command, string message, ...) {
 	vsprintf(formatedMessage, message.c_str(), ap);
 	va_end(ap);
 
-	if (player->perm >= ADM_LVL) {
-		Log(ADM_ACTION, false, "%s: \"%s\": %s", player->usuario, command, formatedMessage);
+	if (player->getPermissionLevel() >= ADM_LVL) {
+		Log::write(ADM_ACTION, false, "%s: \"%s\": %s", player->getUsername(), command, formatedMessage);
 	} else {
-		Log(GM_ACTION, false, "%s: \"%s\": %s", player->usuario, command, formatedMessage);
+		Log::write(GM_ACTION, false, "%s: \"%s\": %s", player->getUsername(), command, formatedMessage);
 	}
 }
 
@@ -707,19 +707,21 @@ bool WorldServer::GM_exp(Player* estecliente, long int exp) {
 }
 
 bool WorldServer::GM_gold(Player* estecliente, long int gold) {
+    Character* character = estecliente->getCurrentCharacter();
+
     if (gold > 0) {
-        if (gold > (signed)(GOLD_MAX - estecliente->chars[estecliente->chara].gold)) {
-            gold = (GOLD_MAX - estecliente->chars[estecliente->chara].gold);
+        if (gold > (signed)(GOLD_MAX - character->GetGold())) {
+            gold = (GOLD_MAX - character->GetGold());
         }
-        this->serverSendPlayerMessage(estecliente, "You gained %i golds!", gold);
+        this->serverSendPlayerMessage(estecliente, "You gained %i gold!", gold);
     } else {
-        if ((estecliente->chars[estecliente->chara].gold + gold) <= 0) {
-            gold = -(estecliente->chars[estecliente->chara].gold - 1);
+        if ((character->GetGold() + gold) <= 0) {
+            gold = -(character->GetGold() - 1);
         }
-        this->serverSendPlayerMessage(estecliente, "You lost %i golds!", -gold);
+        this->serverSendPlayerMessage(estecliente, "You lost %i gold!", -gold);
     }
     this->savePlayer(estecliente);
-    estecliente->chars[estecliente->chara].gold += gold;
+    character->SetGold(character->GetGold() + gold);
     return true;
 }
 
@@ -728,7 +730,7 @@ bool WorldServer::GM_item(Player* estecliente, unsigned int itemid, unsigned int
 }
 
 bool WorldServer::GM_ban(Player* estecliente, char* banid) {
-    Player* outrocliente = GetPlayer(banid);
+    /*Player* outrocliente = GetPlayer(banid);
     if (outrocliente != NULL) {
         if (estecliente->perm > outrocliente->perm) {
             outrocliente->ban = 1;
@@ -749,22 +751,22 @@ bool WorldServer::GM_ban(Player* estecliente, char* banid) {
         	this->serverSendPlayerMessage(estecliente, "This Player: %s does not exist or is not logged in", banid);
             return false;
         }
-    }
+    }*/
 }
 
 bool WorldServer::GM_unban(Player* estecliente, char* unbanid) {
-    Player* outrocliente = GetPlayerDB(unbanid);
+    /*Player* outrocliente = GetPlayerDB(unbanid);
     if (outrocliente != NULL) {
         QueryDB("UPDATE users SET ban ='0' WHERE id ='%i'", outrocliente->id);
         this->serverSendPlayerMessage(estecliente, "Player %i:%s unbanned", outrocliente->id, outrocliente->usuario);
     } else {
     	this->serverSendPlayerMessage(estecliente, "This Player: %s does not exist", unbanid);
-    }
+    }*/
     return true;
 }
 
 bool WorldServer::GM_kick(Player* estecliente, char* kickid) {
-    Player* outrocliente = GetPlayer(kickid);
+    /*Player* outrocliente = GetPlayer(kickid);
     if (outrocliente != NULL) {
         if (estecliente->perm > outrocliente->perm) {
         	this->serverSendPlayerMessage(estecliente, "Player %i:%s kicked", outrocliente->id, outrocliente->usuario);
@@ -777,11 +779,11 @@ bool WorldServer::GM_kick(Player* estecliente, char* kickid) {
     } else {
     	this->serverSendPlayerMessage(estecliente, "This Player: %s does not exist or is not logged in", kickid);
         return false;
-    }
+    }*/
 }
 
 bool WorldServer::GM_warn(Player* estecliente, char* warnid, int warnnum) {
-    Player* outrocliente = GetPlayer(warnid);
+    /*Player* outrocliente = GetPlayer(warnid);
     if (outrocliente != NULL) {
         if (estecliente->perm > outrocliente->perm) {
             outrocliente->warn += warnnum;
@@ -795,14 +797,14 @@ bool WorldServer::GM_warn(Player* estecliente, char* warnid, int warnnum) {
     } else {
     	this->serverSendPlayerMessage(estecliente, "This Player: %s does not exist or is not logged in", warnid);
         return false;
-    }
+    }*/
 }
 
 bool WorldServer::GM_go(Player* estecliente, unsigned int goid, float gox, float goy) {
-    estecliente->chars[estecliente->chara].map = goid;
+    /*estecliente->chars[estecliente->chara].map = goid;
     estecliente->chars[estecliente->chara].x = gox;
     estecliente->chars[estecliente->chara].y = goy;
-    this->serverSendPlayerMessage(estecliente, "You have been teleported to map:%i X:%i Y:%i", goid, gox, goy);
+    this->serverSendPlayerMessage(estecliente, "You have been teleported to map:%i X:%i Y:%i", goid, gox, goy);*/
     return true;
 }
 
@@ -815,7 +817,7 @@ bool WorldServer::GM_buy(Player* estecliente) {
 }
 
 bool WorldServer::GM_restart(Player* estecliente) {
-    RESTART_SERVER = 1;
+    server->RESTART_SERVER = 1;
     return true;
 }
 
@@ -840,11 +842,11 @@ bool WorldServer::GM_reloadskill(Player* estecliente) {
 }
 
 bool WorldServer::GM_reloadguild(Player* estecliente) {
-    pthread_mutex_lock(&MutexLoad);
+    /*pthread_mutex_lock(&MutexLoad);
     Guilds.clear();
     LoadGuilds();
     pthread_mutex_unlock(&MutexLoad);
-    this->serverSendPlayerMessage(estecliente, "The guilds list has been reloaded");
+    this->serverSendPlayerMessage(estecliente, "The guilds list has been reloaded");*/
     return true;
 }
 
@@ -876,7 +878,7 @@ bool WorldServer::GM_clear(Player* estecliente) {
 }
 
 bool WorldServer::GM_call(Player* estecliente, char* callid) {
-    Player* outrocliente = GetPlayer(callid);
+    /*Player* outrocliente = GetPlayer(callid);
     if (outrocliente != NULL) {
         if (estecliente->perm > outrocliente->perm) {
             outrocliente->chars[outrocliente->chara].map = estecliente->chars[estecliente->chara].map;
@@ -891,29 +893,29 @@ bool WorldServer::GM_call(Player* estecliente, char* callid) {
     } else {
     	this->serverSendPlayerMessage(estecliente, "This Player: %s does not exist or is not logged in", callid);
         return false;
-    }
+    }*/
 }
 
 bool WorldServer::GM_heal(Player* estecliente) {
-    estecliente->chars[estecliente->chara].hp = estecliente->chars[estecliente->chara].hp_max;
+    /*estecliente->chars[estecliente->chara].hp = estecliente->chars[estecliente->chara].hp_max;
     estecliente->chars[estecliente->chara].mp = estecliente->chars[estecliente->chara].mp_max;
     this->serverSendPlayerMessage(estecliente, "Your hp and your mp have been restaured");
-    return true;
+    return true;*/
 }
 
 bool WorldServer::GM_hide(Player* estecliente) {
-    if (estecliente->hide == 0) {
-        estecliente->hide = 1;
+    if (estecliente->getHide() == 0) {
+        estecliente->setHide(1);
         this->serverSendPlayerMessage(estecliente, "You are now non visible to other players");
     } else {
-        estecliente->hide = 0;
+        estecliente->setHide(0);
         this->serverSendPlayerMessage(estecliente, "You are now visible to other players");
     }
     return true;
 }
 
 bool WorldServer::GM_maxstat(Player* estecliente) {
-    estecliente->chars[estecliente->chara].hp_max = LIFE_MAX;
+    /*estecliente->chars[estecliente->chara].hp_max = LIFE_MAX;
     estecliente->chars[estecliente->chara].mp_max = LIFE_MAX;
     estecliente->chars[estecliente->chara].sau = STATS_MAX;
     estecliente->chars[estecliente->chara].str = STATS_MAX;
@@ -921,7 +923,7 @@ bool WorldServer::GM_maxstat(Player* estecliente) {
     estecliente->chars[estecliente->chara].dex = STATS_MAX;
     estecliente->chars[estecliente->chara].agi = STATS_MAX;
     estecliente->chars[estecliente->chara].magia = STATS_MAX;
-    this->serverSendPlayerMessage(estecliente, "All of your stats have been set to the maximum");
+    this->serverSendPlayerMessage(estecliente, "All of your stats have been set to the maximum");*/
     return true;
 }
 
@@ -930,17 +932,17 @@ bool WorldServer::GM_maxhab(Player* estecliente) {
 }
 
 bool WorldServer::GM_who(Player* estecliente, char* whoid) {
-    Player* outrocliente = GetPlayer(whoid);
+    /*Player* outrocliente = GetPlayer(whoid);
     if (outrocliente != NULL) {
     	this->serverSendPlayerMessage(estecliente, "User: %i:%s\nChar: %i:%s\nProfission: %i\nSex: %i\nLevel: %i\nPermission: %i\nWarn: %i", outrocliente->id, outrocliente->usuario, outrocliente->chars[outrocliente->chara].id, outrocliente->chars[outrocliente->chara].nome, outrocliente->chars[outrocliente->chara].profissao, outrocliente->chars[outrocliente->chara].sexo, outrocliente->chars[outrocliente->chara].lvl, outrocliente->perm, outrocliente->warn);
     } else {
     	this->serverSendPlayerMessage(estecliente, "This Player: %s does not exist or is not logged in", whoid);
-    }
+    }*/
     return true;
 }
 
 bool WorldServer::GM_guildlvl(Player* estecliente, int lvl) {
-    Guild* guild = GetGuildId(estecliente->chars[estecliente->chara].guild);
+    /*Guild* guild = GetGuildId(estecliente->chars[estecliente->chara].guild);
     if (guild != NULL) {
         if (lvl > 0) {
             if (lvl > (signed)(GUILD_LVL_MAX - guild->lvl)) {
@@ -956,27 +958,27 @@ bool WorldServer::GM_guildlvl(Player* estecliente, int lvl) {
         guild->lvl += lvl;
     } else {
     	this->serverSendPlayerMessage(estecliente, "You do not have a guild!");
-    }
+    }*/
     return true;
 }
 
-bool WorldServer::GM_msg(Player* estecliente, char* msg) {
+bool WorldServer::GM_msg(Player* estecliente, string msg) {
     this->serverMessage(estecliente, msg);
     this->serverSendPlayerMessage(estecliente, "Your message has been sent to all players in the server");
     return true;
 }
 
 bool WorldServer::GM_save(Player* estecliente) {
-    estecliente->chars[estecliente->chara].save_map = estecliente->chars[estecliente->chara].map;
+    /*estecliente->chars[estecliente->chara].save_map = estecliente->chars[estecliente->chara].map;
     estecliente->chars[estecliente->chara].save_x = estecliente->chars[estecliente->chara].x;
     estecliente->chars[estecliente->chara].save_y = estecliente->chars[estecliente->chara].y;
-    this->serverSendPlayerMessage(estecliente, "Your actual position has been saved as your default respawn point");
+    this->serverSendPlayerMessage(estecliente, "Your actual position has been saved as your default respawn point");*/
     return true;
 }
 //------------------------------------------------------------------------------
 
 bool WorldServer::GM_A_lvl(Player* estecliente, char* player, int lvl) {
-    Player* outrocliente = GetPlayer(player);
+    /*Player* outrocliente = GetPlayer(player);
     if (outrocliente != NULL) {
         if (estecliente->perm > outrocliente->perm) {
             outrocliente->chars[outrocliente->chara].lvl += lvl;
@@ -988,11 +990,11 @@ bool WorldServer::GM_A_lvl(Player* estecliente, char* player, int lvl) {
     } else {
     	this->serverSendPlayerMessage(estecliente, "This Player: %s does not exist or is not logged in", player);
         return false;
-    }
+    }*/
 }
 
 bool WorldServer::GM_A_exp(Player* estecliente, char* player, long int exp) {
-    Player* outrocliente = GetPlayer(player);
+    /*Player* outrocliente = GetPlayer(player);
     if (outrocliente != NULL) {
         if (estecliente->perm > outrocliente->perm) {
             outrocliente->chars[outrocliente->chara].exp += exp;
@@ -1004,11 +1006,11 @@ bool WorldServer::GM_A_exp(Player* estecliente, char* player, long int exp) {
     } else {
     	this->serverSendPlayerMessage(estecliente, "This Player: %s does not exist or is not logged in", player);
         return false;
-    }
+    }*/
 }
 
 bool WorldServer::GM_A_gold(Player* estecliente, char* player, long int gold) {
-    Player* outrocliente = GetPlayer(player);
+    /*Player* outrocliente = GetPlayer(player);
     if (outrocliente != NULL) {
         if (estecliente->perm > outrocliente->perm) {
             outrocliente->chars[outrocliente->chara].gold += gold;
@@ -1020,11 +1022,11 @@ bool WorldServer::GM_A_gold(Player* estecliente, char* player, long int gold) {
     } else {
     	this->serverSendPlayerMessage(estecliente, "This Player: %s does not exist or is not logged in", player);
         return false;
-    }
+    }*/
 }
 
 bool WorldServer::GM_A_item(Player* estecliente, char* player, unsigned int itemid) {
-    Player* outrocliente = GetPlayer(player);
+    /*Player* outrocliente = GetPlayer(player);
     if (outrocliente != NULL) {
         if (estecliente->perm > outrocliente->perm) {
             return true;
@@ -1033,11 +1035,11 @@ bool WorldServer::GM_A_item(Player* estecliente, char* player, unsigned int item
     } else {
     	this->serverSendPlayerMessage(estecliente, "This Player: %s does not exist or is not logged in", player);
         return false;
-    }
+    }*/
 }
 
 bool WorldServer::GM_A_go(Player* estecliente, char* player, unsigned int goid, float gox, float goy) {
-    Player* outrocliente = GetPlayer(player);
+    /*Player* outrocliente = GetPlayer(player);
     if (outrocliente != NULL) {
         if (estecliente->perm > outrocliente->perm) {
             outrocliente->chars[outrocliente->chara].map = goid;
@@ -1051,11 +1053,11 @@ bool WorldServer::GM_A_go(Player* estecliente, char* player, unsigned int goid, 
     } else {
     	this->serverSendPlayerMessage(estecliente, "This Player: %s does not exist or is not logged in", player);
         return false;
-    }
+    }*/
 }
 
 bool WorldServer::GM_A_buff(Player* estecliente, char* player) {
-    Player* outrocliente = GetPlayer(player);
+    /*Player* outrocliente = GetPlayer(player);
     if (outrocliente != NULL) {
         if (estecliente->perm > outrocliente->perm) {
             return true;
@@ -1064,11 +1066,11 @@ bool WorldServer::GM_A_buff(Player* estecliente, char* player) {
     } else {
     	this->serverSendPlayerMessage(estecliente, "This Player: %s does not exist or is not logged in", player);
         return false;
-    }
+    }*/
 }
 
 bool WorldServer::GM_A_repair(Player* estecliente, char* player) {
-    Player* outrocliente = GetPlayer(player);
+    /*Player* outrocliente = GetPlayer(player);
     if (outrocliente != NULL) {
         if (estecliente->perm > outrocliente->perm) {
             return true;
@@ -1077,11 +1079,11 @@ bool WorldServer::GM_A_repair(Player* estecliente, char* player) {
     } else {
     	this->serverSendPlayerMessage(estecliente, "This Player: %s does not exist or is not logged in", player);
         return false;
-    }
+    }*/
 }
 
 bool WorldServer::GM_A_heal(Player* estecliente, char* player) {
-    Player* outrocliente = GetPlayer(player);
+    /*Player* outrocliente = GetPlayer(player);
     if (outrocliente != NULL) {
         if (estecliente->perm > outrocliente->perm) {
             outrocliente->chars[outrocliente->chara].hp = outrocliente->chars[outrocliente->chara].hp_max;
@@ -1094,11 +1096,11 @@ bool WorldServer::GM_A_heal(Player* estecliente, char* player) {
     } else {
     	this->serverSendPlayerMessage(estecliente, "This Player: %s does not exist or is not logged in", player);
         return false;
-    }
+    }*/
 }
 
 bool WorldServer::GM_A_maxstat(Player* estecliente, char* player) {
-    Player* outrocliente = GetPlayer(player);
+    /*Player* outrocliente = GetPlayer(player);
     if (outrocliente != NULL) {
         if (estecliente->perm > outrocliente->perm) {
             outrocliente->chars[outrocliente->chara].hp_max = LIFE_MAX;
@@ -1117,11 +1119,11 @@ bool WorldServer::GM_A_maxstat(Player* estecliente, char* player) {
     } else {
     	this->serverSendPlayerMessage(estecliente, "This Player: %s does not exist or is not logged in", player);
         return false;
-    }
+    }*/
 }
 
 bool WorldServer::GM_A_maxhab(Player* estecliente, char* player) {
-    Player* outrocliente = GetPlayer(player);
+    /*Player* outrocliente = GetPlayer(player);
     if (outrocliente != NULL) {
         if (estecliente->perm > outrocliente->perm) {
             return true;
@@ -1130,11 +1132,11 @@ bool WorldServer::GM_A_maxhab(Player* estecliente, char* player) {
     } else {
     	this->serverSendPlayerMessage(estecliente, "This Player: %s does not exist or is not logged in", player);
         return false;
-    }
+    }*/
 }
 
 bool WorldServer::GM_A_guildlvl(Player* estecliente, char* player, int lvl) {
-    Player* outrocliente = GetPlayer(player);
+    /*Player* outrocliente = GetPlayer(player);
     if (outrocliente != NULL) {
         if (estecliente->perm > outrocliente->perm) {
             Guild* guild = GetGuildId(outrocliente->chars[outrocliente->chara].guild);
@@ -1151,11 +1153,11 @@ bool WorldServer::GM_A_guildlvl(Player* estecliente, char* player, int lvl) {
     } else {
     	this->serverSendPlayerMessage(estecliente, "This Player: %s does not exist or is not logged in", player);
         return false;
-    }
+    }*/
 }
 
 bool WorldServer::GM_A_save(Player* estecliente, char* player) {
-    Player* outrocliente = GetPlayer(player);
+    /*Player* outrocliente = GetPlayer(player);
     if (outrocliente != NULL) {
         if (estecliente->perm > outrocliente->perm) {
             outrocliente->chars[outrocliente->chara].save_map = outrocliente->chars[outrocliente->chara].map;
@@ -1169,5 +1171,5 @@ bool WorldServer::GM_A_save(Player* estecliente, char* player) {
     } else {
     	this->serverSendPlayerMessage(estecliente, "This Player: %s does not exist or is not logged in", player);
         return false;
-    }
+    }*/
 }

@@ -15,7 +15,7 @@ WorldServer::~WorldServer() {
 }
 
 void WorldServer::playerMessage(Player* player, string msg) {
-    if (player->perm >= GM_LVL) {
+    if (player->getPermissionLevel() >= GM_LVL) {
         switch (msg[0]) {
             case '/':
                 if (msg[1] != '/') {
@@ -34,7 +34,7 @@ void WorldServer::playerMessage(Player* player, string msg) {
     switch (msg[0]) {
         case '@':
             msg.erase(0);
-            this->privateMessage(player, msg);
+            //this->privateMessage(player, msg);
             return;
         case '$':
             msg.erase(0);

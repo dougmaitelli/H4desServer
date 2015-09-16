@@ -7,6 +7,8 @@
 
 #include "WorldServer.h"
 
+//TODO: Change strtok usage to strtok_r and review current commands
+
 bool WorldServer::gmCmd(Player* player, string command) {
     char* cmdo;
     cmdo = strtok(command.c_str(), " ,.");

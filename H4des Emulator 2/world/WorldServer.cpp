@@ -1,7 +1,7 @@
-/* 
+/*
  * File:   WorldServer.cpp
  * Author: Douglas Maitelli
- * 
+ *
  * Created on 4 de Dezembro de 2010, 19:37
  */
 
@@ -51,7 +51,7 @@ void WorldServer::playerMessage(Player* player, string msg) {
 }
 
 void WorldServer::savePlayer(Player* player) {
-	//TODO
+	//TODO: Save Player on DB
 }
 
 void WorldServer::disconnectPlayer(Player* player) {

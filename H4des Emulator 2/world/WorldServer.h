@@ -15,14 +15,21 @@
 #include <netinet/tcp.h>
 
 #include <pthread.h>
+#include <vector>
 
 #include "../commom/Utils.h"
 #include "../Server.h"
 #include "../player/Player.h"
+#include "../party/Guild.h"
+#include "../party/Party.h"
+
+using namespace std;
 
 class Utils;
 class Server;
 class Player;
+class Guild;
+class Party;
 
 struct Transfer_Data {
     int command;

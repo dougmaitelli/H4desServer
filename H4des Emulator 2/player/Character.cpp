@@ -1,8 +1,8 @@
 /*
  * File:   Character.cpp
- * Author: DougM
+ * Author: Douglas Maitelli
  *
- * Created on 4 de Dezembro de 2010, 19:15
+ * Created on December, 4 de 2010, 19:15
  */
 
 #include "Character.h"
@@ -12,6 +12,9 @@ Character::Character() {
 
 Character::~Character() {
 }
+
+//TODO: Organize this mess according to Header
+
 vector<Player*> Character::GetFriends() const {
     return friends;
 }

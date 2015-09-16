@@ -10,12 +10,16 @@
 
 #include <netinet/in.h>
 
+#include "../Server.h"
 #include "Character.h"
 
+class Server;
 class Character;
 
 class Player {
 private:
+    Server* server;
+
     unsigned long id;
     char user[100];
     unsigned int warn;
@@ -26,7 +30,7 @@ private:
     Character* currentCharacter;
 
 public:
-    Player();
+    Player(Server* server);
     virtual ~Player();
 
 	int socket;
@@ -34,6 +38,8 @@ public:
 	char ip[16];
 	char subnet[12];
 	bool active;
+
+	Server* getServer() const;
 
     Character* getCurrentCharacter() const;
     void setCurrentCharacter(Character*);

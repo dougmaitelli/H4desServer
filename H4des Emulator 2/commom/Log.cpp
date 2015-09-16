@@ -9,10 +9,12 @@
 
 void Log::foregroundColor(int color) {
     __FOREGROUND = color;
+    //TODO: Color Support on Linux
 }
 
 void Log::backgroundColor(int color) {
     __BACKGROUND = color;
+    //TODO: Color Support on Linux
 }
 
 void Log::write(MsgType type, char* text, ...) {

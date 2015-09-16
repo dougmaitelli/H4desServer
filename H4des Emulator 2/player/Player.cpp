@@ -7,10 +7,17 @@
 
 #include "Player.h"
 
-Player::Player() {
+Player::Player(Server* server) {
+    this->server = server;
 }
 
 Player::~Player() {
+}
+
+//TODO: Add Mising Getters and Setters
+
+Server* Player::getServer() const {
+    return server;
 }
 
 Character* Player::getCurrentCharacter() const {

@@ -7,6 +7,8 @@
 
 #include "Database.h"
 
+//TODO: Fix Database Connector
+
 Database::Database() {
     host = "localhost";
     username = "root";

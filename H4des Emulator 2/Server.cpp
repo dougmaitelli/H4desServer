@@ -23,7 +23,7 @@ bool Server::initServer() {
     Log::write(LOAD, "[||                  ] 10% > Creating socket...");
     s = socket(AF_INET, SOCK_STREAM, 0);
     if (s < 0) {
-        //closesocket(s);
+        close(s);
         //WSACleanup();
         Log::write(SERVER_ERROR, "Error creating socket");
         return false;
@@ -32,7 +32,7 @@ bool Server::initServer() {
     Log::write(LOAD, "[|||                 ] 15% > Setting socket options...");
     int option = 1;
 	if (setsockopt(s, SOL_SOCKET, SO_KEEPALIVE, (const char*) &option, sizeof (option)) == -1) {
-		//closesocket(s);
+		close(s);
 		//WSACleanup();
 		Log::write(SERVER_ERROR, "Error setting socket options!");
         return false;
@@ -45,14 +45,14 @@ bool Server::initServer() {
     addr.sin_port = htons(port);
     addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	if (bind(s, (struct sockaddr*) &addr, sizeof(addr)) < 0) {
-		//closesocket(s);
+		close(s);
 		//WSACleanup();
 		Log::write(SERVER_ERROR, "Error binding server port!");
         return false;
 	}
     Log::write(LOAD, "[|||||               ] 25% > Starting server listen...");
 	if (listen(s, SOMAXCONN) < 0) {
-		//closesocket(s);
+		close(s);
 		//WSACleanup();
 		Log::write(SERVER_ERROR, "Error starting server listen!");
         return false;
@@ -76,7 +76,7 @@ bool Server::initServer() {
     db->wait();
     db->close();
     delete db;
-    //closesocket(s);
+    close(s);
     //WSACleanup();
 
     return true;
@@ -126,6 +126,8 @@ bool Server::loadServer() {
 
      return true;
 }
+
+//TODO: Create config file handling
 
 bool Server::loadConfig() {
     /*WorldServer::MAX_PLAYERS = GetPrivateProfileInt("Config", "MAX_PLAYERS", 500, ".//config.ini");
@@ -186,6 +188,8 @@ bool Server::loadConfig() {
     return true;
 }
 
+//TODO: Create Find Methods
+
 Player* Server::findPlayerByName(string name) {
     /*for (unsigned int i = 0; i < players.size(); i++) {
         player_base* estecliente = Players.at(i);
@@ -219,6 +223,8 @@ Guild* Server::findGuildByName(string nome) {
     }*/
     return NULL;
 }
+
+//TODO: Create file load functions
 
 bool Server::loadItems() {
      FILE* file;
@@ -332,11 +338,11 @@ void Server::serverLoop() {
 		}
 		if (atividade > 0)  {
            if (FD_ISSET(s, &fds) && players.size() < DEF_MAX_PLAYERS) {
-              novocliente = accept(s, (struct sockaddr*) &cliente_sock, &addr_size);
-              if (novocliente < 0) {
+              newClient = accept(s, (struct sockaddr*) &cliente_sock, &addr_size);
+              if (newClient < 0) {
                  Log::write(SERVER_ERROR, "Error accepting new connection...");
               } else {
-                 this->addPlayer(novocliente, &cliente_sock);
+                 this->addPlayer(newClient, &cliente_sock);
               }
            }
         }
@@ -347,6 +353,7 @@ void Server::serverLoop() {
 }
 
 bool Server::resetOnlines() {
+    //TODO: Fix Queries
     /*if (!QueryDB("UPDATE users SET online ='0' WHERE online ='1'")) {
         Log::write(SERVER_ERROR, "Erro ao resetar status online dos usu�rios...");
         return false;
@@ -359,7 +366,7 @@ bool Server::resetOnlines() {
 }
 
 void Server::addPlayer(int clientSocket, sockaddr_in* clientSockAddr) {
-    Player* player = new Player();
+    Player* player = new Player(this);
 
     //player->logado = false;
     player->active = true;
@@ -372,7 +379,7 @@ void Server::addPlayer(int clientSocket, sockaddr_in* clientSockAddr) {
     players.push_back(player);
     memcpy(&player->sockeAddr, clientSockAddr, sizeof(struct sockaddr_in));
     Log::write(CLIENT, "[%i]Client connected in %s subnet: %s!", player->getSocket(), player->getIp(), player->getSubnet());
-    pthread_create(&thread[clientSocket], NULL, refreshPlayers, (PVOID) player);
+    pthread_create(&thread[clientSocket], NULL, &Server::refreshPlayer, player);
 }
 
 void Server::removePlayer(Player* player) {
@@ -392,43 +399,46 @@ void Server::removePlayer(Player* player) {
 }
 
 void Server::disconnectPlayer(Player* player) {
-	Log(CLIENT, false, "[%i]Client disconnected in %s subnet: %s!", player->getSocket(), player->getIp(), player->getSubnet());
-     if (!QueryDB("UPDATE users SET online ='0' WHERE id ='%i'", estecliente->id)) {
+    //TODO: Fix Queries
+	Log::write(CLIENT, "[%i]Client disconnected in %s subnet: %s!", player->getSocket(), player->getIp(), player->getSubnet());
+     /*if (!QueryDB("UPDATE users SET online ='0' WHERE id ='%i'", estecliente->id)) {
         Log::write(SERVER_ERROR, "N�o foi poss�vel atualizar o status do player: %i:%s para offline", estecliente->id, estecliente->usuario);
      }
      if (!QueryDB("UPDATE chars SET online ='0' WHERE user ='%i'", estecliente->id)) {
         Log::write(SERVER_ERROR, "N�o foi poss�vel atualizar o status do char do player: %i:%s para offline", estecliente->id, estecliente->usuario);
-     }
+     }*/
      player->active = false;
-     //closesocket(player->getSocket());
+     close(player->getSocket());
 }
 
-PVOID refreshPlayers(PVOID playerP) {
+void* Server::refreshPlayer(void* playerP) {
     fd_set fds;
 
     Player* player = (Player*) playerP;
 
+    Server* server = player->getServer();
+
     do {
         FD_ZERO(&fds);
         FD_SET(player->socket, &fds);
-		int atividade = select(player->socket + 1, &fds, NULL, NULL, NULL);
-		if (atividade == SOCKET_ERROR) {
-			Log::write(CLIENT, "[%i]Client socket error in %s subnet: %s! Error: #%i", player->getSocket(), player->getIp(), player->getSubnet(), WSAGetLastError());
+		int activity = select(player->socket + 1, &fds, NULL, NULL, NULL);
+		if (activity < 0) {
+			Log::write(CLIENT, "[%i]Client socket error in %s subnet: %s!", player->getSocket(), player->getIp(), player->getSubnet());
+            continue;
 		}
-		if (atividade > 0) {
-		   if (FD_ISSET(player->socket, &fds)) {
-              char buffer[10000];
-              int received = recv(player->socket, buffer, sizeof(buffer), 0);
-              if (received <= 0) {
-                 if (player->active) {
-                    server->disconnectPlayer(player);
-                 }
-                 break;
-              } else {
-                 server->PacoteExec(player, buffer);
-              }
-           }
-        }
+       if (FD_ISSET(player->socket, &fds)) {
+          char buffer[10000];
+          int received = recv(player->socket, buffer, sizeof(buffer), 0);
+          if (received <= 0) {
+             if (player->active) {
+                server->disconnectPlayer(player);
+             }
+             break;
+          } else {
+              //TODO: Do the packet handling
+             //server->execPacket(player, buffer);
+          }
+       }
     } while(player->active);
 
     server->removePlayer(player);

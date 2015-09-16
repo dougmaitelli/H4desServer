@@ -9,16 +9,21 @@
 #define	SERVER_H
 
 #include <stdio.h>
+#include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
 #include <arpa/inet.h>
+
 #include <pthread.h>
 #include <string.h>
 
-#include "world/WorldServer.h"
 #include "Database.h"
+#include "world/WorldServer.h"
+#include "player/Player.h"
+#include "player/Character.h"
+#include "assets/Item.h"
 
 #define SERVER_NAME "H4des"
 
@@ -33,8 +38,11 @@
 
 using namespace std;
 
-class WorldServer;
 class Database;
+class WorldServer;
+class Player;
+class Character;
+class Item;
 
 class Server {
 private:
@@ -77,6 +85,7 @@ public:
     void addPlayer(int, sockaddr_in*);
     void removePlayer(Player*);
     void disconnectPlayer(Player*);
+    static void* refreshPlayer(void*);
 
     // Search
     Player* findPlayerByName(string name);

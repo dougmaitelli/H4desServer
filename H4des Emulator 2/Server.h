@@ -8,23 +8,28 @@
 #ifndef SERVER_H
 #define	SERVER_H
 
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <arpa/inet.h>
 #include <pthread.h>
+#include <string.h>
 
 #include "world/WorldServer.h"
 #include "Database.h"
 
 #define SERVER_NAME "H4des"
 
-#define MAX_PLAYERS 5000
-#define MAX_PLAYER_CHARS 5
+#define DEF_MAX_PLAYERS 5000
+#define DEF_MAX_PLAYER_CHARS 5
 
-#define DATA_FOLDER "data/"
-
-#define ITEMS_PATH DATA_FOLDER + "items/items.csv"
-#define MONSTER_PATH DATA_FOLDER + "monsters/monsters.csv"
-#define NPCS_PATH DATA_FOLDER + "npcs/npcs.csv"
-#define QUESTS_PATH DATA_FOLDER + "quests/quests.csv"
-#define SKILLS_PATH DATA_FOLDER + "skills/skills.csv"
+#define ITEMS_PATH "data/items/items.csv"
+#define MONSTER_PATH "data/monsters/monsters.csv"
+#define NPCS_PATH "data/npcs/npcs.csv"
+#define QUESTS_PATH "data/quests/quests.csv"
+#define SKILLS_PATH "data/skills/skills.csv"
 
 using namespace std;
 
@@ -37,6 +42,8 @@ private:
 
     int s;
     Database* db;
+
+    pthread_t thread[65535];
 
     pthread_mutex_t playersMutex;
     vector<Player*> players;
@@ -70,6 +77,11 @@ public:
     void addPlayer(int, sockaddr_in*);
     void removePlayer(Player*);
     void disconnectPlayer(Player*);
+
+    // Search
+    Player* findPlayerByName(string name);
+    Character* findCharacterByName(string name);
+    Guild* findGuildByName(string name);
 };
 
 #endif	/* SERVER_H */

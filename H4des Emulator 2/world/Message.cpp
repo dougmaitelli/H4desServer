@@ -11,7 +11,7 @@ void WorldServer::serverSendAllMessage(string message, ...) {
     va_list ap;
     va_start(ap, message);
 
-    for (UINT i = 0; i < players.size(); i++) {
+    for (unsigned int i = 0; i < players.size(); i++) {
         Player* toPlayer = players.at(i);
 
         if (estecliente->logado) {
@@ -43,7 +43,7 @@ void WorldServer::serverSendGuildMessage(Guild* guild, string message, ...) {
 
     vector<Player*> guildMembers = guild->getPlayers();
 
-    for (UINT i = 0; i < guildMembers.size(); i++) {
+    for (unsigned int i = 0; i < guildMembers.size(); i++) {
 		Player* guildPlayer = guildMembers.at(i);
 
 		Transfer_Data data;
@@ -61,7 +61,7 @@ void WorldServer::serverSendPartyMessage(Party* party, string message, ...) {
 
 	vector<Player*> partyMembers = party->getPlayers();
 
-	for (UINT i = 0; i < partyMembers.size(); i++) {
+	for (unsigned int i = 0; i < partyMembers.size(); i++) {
 		Player* partyPlayer = partyMembers.at(i);
 
 		Transfer_Data data;
@@ -76,7 +76,7 @@ void WorldServer::serverSendPartyMessage(Party* party, string message, ...) {
 void WorldServer::serverMessage(Player* player, string message) {
 	Character* character = player->getCurrentCharacter();
 
-    for (UINT i = 0; i < players.size(); i++) {
+    for (unsigned int i = 0; i < players.size(); i++) {
 		Player* toPlayer = players.at(i);
 
 		if (estecliente->logado) {
@@ -91,7 +91,7 @@ void WorldServer::serverMessage(Player* player, string message) {
 void WorldServer::chatMessage(Player* player, string message) {
 	Character* character = player->getCurrentCharacter();
 
-	for (UINT i = 0; i < players.size(); i++) {
+	for (unsigned int i = 0; i < players.size(); i++) {
 		Player* toPlayer = players.at(i);
 
 		Transfer_Data data;
@@ -121,7 +121,7 @@ void WorldServer::guildMessage(Player* player, string message) {
 
 	vector<Player*> guildMembers = guild->getPlayers();
 
-	for (UINT i = 0; i < guildMembers.size(); i++) {
+	for (unsigned int i = 0; i < guildMembers.size(); i++) {
 		Player* guildPlayer = guildMembers.at(i);
 
 		Transfer_Data data;
@@ -137,7 +137,7 @@ void WorldServer::partyMessage(Player* player, string message) {
 
 	vector<Player*> partyMembers = party->getPlayers();
 
-    for (UINT i = 0; i < partyMembers.size(); i++) {
+    for (unsigned int i = 0; i < partyMembers.size(); i++) {
     	Player* partyPlayer = partyMembers.at(i);
 
 		Transfer_Data data;

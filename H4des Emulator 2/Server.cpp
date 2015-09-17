@@ -1,13 +1,19 @@
 /*
  * File:   Server.cpp
- * Author: DougM
+ * Author: Douglas Maitelli
  *
- * Created on 4 de Dezembro de 2010, 20:53
+ * Created on December, 4 2010, 20:53
  */
 
 #include "Server.h"
-#include "commom/Log.h"
+
 #include "Database.h"
+#include "commom/Log.h"
+#include "world/WorldServer.h"
+#include "player/Player.h"
+#include "player/Character.h"
+#include "assets/Item.h"
+#include "party/Guild.h"
 
 Server::Server() {
     EXIT_SERVER_PROCCESS = 0;
@@ -18,7 +24,7 @@ Server::~Server() {
 }
 
 bool Server::initServer() {
-    Log::write(LOGO);
+    Log::writeLogo();
 
     Log::write(LOAD, "[||                  ] 10% > Creating socket...");
     s = socket(AF_INET, SOCK_STREAM, 0);

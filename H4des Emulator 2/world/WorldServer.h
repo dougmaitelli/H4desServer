@@ -17,14 +17,9 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <vector>
+#include <string>
+#include <string.h>
 #include <pthread.h>
-
-#include "../commom/Log.h"
-#include "../commom/Utils.h"
-#include "../Server.h"
-#include "../player/Player.h"
-#include "../party/Guild.h"
-#include "../party/Party.h"
 
 using namespace std;
 

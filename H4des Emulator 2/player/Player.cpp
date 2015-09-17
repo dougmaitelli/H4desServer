@@ -7,6 +7,9 @@
 
 #include "Player.h"
 
+#include "../Server.h"
+#include "Character.h"
+
 Player::Player(Server* server) {
     this->server = server;
 }
@@ -64,4 +67,16 @@ Character* Player::getCurrentCharacter() const {
 
 void Player::setCurrentCharacter(Character* character) {
 	this->currentCharacter = character;
+}
+
+int Player::getSocket() const {
+    return socket;
+}
+
+const char* Player::getIp() const {
+    return &ip[0];
+}
+
+const char* Player::getSubnet() const {
+    return &subnet[0];
 }

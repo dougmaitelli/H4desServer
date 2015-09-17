@@ -8,11 +8,9 @@
 #ifndef PARTY_H
 #define	PARTY_H
 
-using namespace std;
-
 #include <vector>
 
-#include "../player/Player.h"
+using namespace std;
 
 class Player;
 

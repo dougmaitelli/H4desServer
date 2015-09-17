@@ -9,9 +9,9 @@
 #define	PLAYER_H
 
 #include <netinet/in.h>
+#include <string>
 
-#include "../Server.h"
-#include "Character.h"
+using namespace std;
 
 class Server;
 class Character;
@@ -56,8 +56,8 @@ public:
     void setCurrentCharacter(Character*);
 
     int getSocket() const;
-    char* getIp() const;
-    char* getSubnet() const;
+    const char* getIp() const;
+    const char* getSubnet() const;
 };
 
 #endif	/* PLAYER_H */

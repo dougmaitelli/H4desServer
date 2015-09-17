@@ -17,13 +17,9 @@
 #include <arpa/inet.h>
 
 #include <pthread.h>
+#include <string>
 #include <string.h>
-
-#include "Database.h"
-#include "world/WorldServer.h"
-#include "player/Player.h"
-#include "player/Character.h"
-#include "assets/Item.h"
+#include <vector>
 
 #define SERVER_NAME "H4des"
 
@@ -38,11 +34,13 @@
 
 using namespace std;
 
+class Log;
 class Database;
 class WorldServer;
 class Player;
 class Character;
 class Item;
+class Guild;
 
 class Server {
 private:
@@ -88,9 +86,9 @@ public:
     static void* refreshPlayer(void*);
 
     // Search
-    Player* findPlayerByName(string name);
-    Character* findCharacterByName(string name);
-    Guild* findGuildByName(string name);
+    Player* findPlayerByName(string);
+    Character* findCharacterByName(string);
+    Guild* findGuildByName(string);
 };
 
 #endif	/* SERVER_H */

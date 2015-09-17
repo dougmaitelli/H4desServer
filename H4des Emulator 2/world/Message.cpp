@@ -7,6 +7,14 @@
 
 #include "WorldServer.h"
 
+#include "../commom/Log.h"
+#include "../commom/Utils.h"
+#include "../Server.h"
+#include "../player/Player.h"
+#include "../player/Character.h"
+#include "../party/Guild.h"
+#include "../party/Party.h"
+
 void WorldServer::serverSendAllMessage(string message, ...) {
     va_list ap;
     va_start(ap, message);

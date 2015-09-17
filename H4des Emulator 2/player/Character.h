@@ -11,17 +11,13 @@
 #include <string>
 #include <vector>
 
-#include "PlayerItem.h"
-#include "../assets/Skill.h"
-#include "../party/Party.h"
-#include "../party/Guild.h"
-
 using namespace std;
 
+class Player;
 class PlayerItem;
 class Skill;
-class Party;
 class Guild;
+class Party;
 
 enum Sex {
     MALE,

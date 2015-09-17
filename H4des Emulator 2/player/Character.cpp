@@ -7,6 +7,12 @@
 
 #include "Character.h"
 
+#include "Player.h"
+#include "PlayerItem.h"
+#include "../assets/Skill.h"
+#include "../party/Guild.h"
+#include "../party/Party.h"
+
 Character::Character() {
 }
 

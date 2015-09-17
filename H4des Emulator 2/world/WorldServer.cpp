@@ -7,6 +7,14 @@
 
 #include "WorldServer.h"
 
+#include "../commom/Log.h"
+#include "../commom/Utils.h"
+#include "../Server.h"
+#include "../player/Player.h"
+#include "../player/Character.h"
+#include "../party/Guild.h"
+#include "../party/Party.h"
+
 WorldServer::WorldServer(Server* server) {
 	this->server = server;
 }

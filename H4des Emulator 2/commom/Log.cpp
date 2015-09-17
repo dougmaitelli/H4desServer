@@ -7,6 +7,8 @@
 
 #include "Log.h"
 
+pthread_mutex_t Log::mutexLOG = PTHREAD_MUTEX_INITIALIZER;
+
 string Log::getColorCode(Color foreground = NONE, Color background = NONE) {
     char num_s[3];
     string s = "\033[";
@@ -28,30 +30,33 @@ string Log::getColorCode(Color foreground = NONE, Color background = NONE) {
     return s + "m";
 }
 
-void Log::write(MsgType type, char* text, ...) {
+void Log::writeLogo() {
+    cout << getColorCode(RED);
+    cout << "               /-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\\" << endl;
+    cout << "              /      ___ ___    _____     .___                  \\" << endl;
+    cout << "              <     /   |   \\  /  |  |  __| _/____   ______     >" << endl;
+    cout << "              <    /    ~    \\/   |  |_/ __ |/ __ \\ /  ___/     >" << endl;
+    cout << "              <    \\    Y    /    ^   / /_/ \\  ___/ \\___ \\      >" << endl;
+    cout << "              <     \\___|_  /\\____   |\\____ |\\___  >____  >     >" << endl;
+    cout << "              <           \\/      |__|     \\/    \\/     \\/      >" << endl;
+    cout << "              <               E  M  U  L  A  T  O  R            >" << endl;
+    cout << "              \\             U  N  I  T     T  E  A  M           /" << endl;
+    cout << "               \\-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-/" << endl;
+    cout << getColorCode();
+}
+
+void Log::write(MsgType type, string text, ...) {
     va_list ap;
     va_start(ap, text);
-    char* textF;
-    vsprintf(textF, text, ap);
+    int size = text.size() * 2;
+    char* textF = new char[size];
+    vsprintf(textF, text.c_str(), ap);
     va_end(ap);
 
     Color color = NONE;
 
     char* textC;
     switch (type) {
-        case LOGO:
-            cout << getColorCode(RED);
-            cout << "               /-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\\" << endl;
-            cout << "              /      ___ ___    _____     .___                  \\" << endl;
-            cout << "              <     /   |   \\  /  |  |  __| _/____   ______     >" << endl;
-            cout << "              <    /    ~    \\/   |  |_/ __ |/ __ \\ /  ___/     >" << endl;
-            cout << "              <    \\    Y    /    ^   / /_/ \\  ___/ \\___ \\      >" << endl;
-            cout << "              <     \\___|_  /\\____   |\\____ |\\___  >____  >     >" << endl;
-            cout << "              <           \\/      |__|     \\/    \\/     \\/      >" << endl;
-            cout << "              <               E  M  U  L  A  T  O  R            >" << endl;
-            cout << "              \\             U  N  I  T     T  E  A  M           /" << endl;
-            cout << "               \\-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-/" << endl;
-            break;
         case SHOW_MSG:
             textC = textF;
             break;
@@ -137,5 +142,5 @@ void Log::write(MsgType type, char* text, ...) {
 }
 
 void Log::printColor(Color color, string text){
-    cout << getColorCode(color) << text << endl;
+    cout << getColorCode(color) << text << getColorCode() << endl;
 }

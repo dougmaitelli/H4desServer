@@ -7,6 +7,8 @@
 
 #include "Guild.h"
 
+#include "../player/Player.h"
+
 Guild::Guild() {
 }
 

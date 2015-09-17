@@ -18,7 +18,6 @@
 using namespace std;
 
 enum MsgType {
-    LOGO,
     SHOW_MSG,
     SQL_ERROR,
     SERVER_ERROR,
@@ -43,16 +42,16 @@ enum Color {
     WHITE
 };
 
-pthread_mutex_t mutexLOG = PTHREAD_MUTEX_INITIALIZER;
-
 class Log {
-public:
-    static void write(MsgType, char* = "", ...);
-
 private:
+    static pthread_mutex_t mutexLOG;
+
     static string getColorCode(Color, Color);
     static void printColor(Color, string);
 
+public:
+    static void writeLogo();
+    static void write(MsgType, string, ...);
 };
 
 #endif	/* LOG_H */

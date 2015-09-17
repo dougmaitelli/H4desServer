@@ -7,7 +7,74 @@
 
 #include "WorldServer.h"
 
+#include "../commom/Log.h"
+#include "../commom/Utils.h"
+#include "../Server.h"
+#include "../player/Player.h"
+#include "../player/Character.h"
+#include "../party/Guild.h"
+#include "../party/Party.h"
+
 //TODO: Change strtok usage to strtok_r and review current commands
+
+//------------------------------------------------------------------------
+// Global Config Vars
+//------------------------------------------------------------------------
+unsigned int WorldServer::MAX_PLAYERS = 100;
+
+unsigned int WorldServer::LVL_MAX = 100;
+unsigned int WorldServer::GUILD_LVL_MAX = 100;
+unsigned int WorldServer::EXP_MAX = 1000;
+unsigned int WorldServer::GOLD_MAX = 1000;
+unsigned int WorldServer::LIFE_MAX = 1000;
+unsigned int WorldServer::STATS_MAX = 1000;
+
+unsigned int WorldServer::ADM_LVL = 100;
+unsigned int WorldServer::GM_LVL = 30;
+
+unsigned int WorldServer::LVL_PERM = 0;
+unsigned int WorldServer::EXP_PERM = 0;
+unsigned int WorldServer::GOLD_PERM = 0;
+unsigned int WorldServer::ITEM_PERM = 0;
+unsigned int WorldServer::BAN_PERM = 0;
+unsigned int WorldServer::UNBAN_PERM = 0;
+unsigned int WorldServer::KICK_PERM = 0;
+unsigned int WorldServer::WARN_PERM = 0;
+unsigned int WorldServer::GO_PERM = 0;
+unsigned int WorldServer::BUFF_PERM = 0;
+unsigned int WorldServer::BUY_PERM = 0;
+unsigned int WorldServer::RESTART_PERM = 0;
+unsigned int WorldServer::RELOADITEM_PERM = 0;
+unsigned int WorldServer::RELOADNPC_PERM = 0;
+unsigned int WorldServer::RELOADMONSTER_PERM = 0;
+unsigned int WorldServer::RELOADQUEST_PERM = 0;
+unsigned int WorldServer::RELOADSKILL_PERM = 0;
+unsigned int WorldServer::RELOADGUILD_PERM = 0;
+unsigned int WorldServer::TEMPO_PERM = 0;
+unsigned int WorldServer::REPAIR_PERM = 0;
+unsigned int WorldServer::SUMMON_PERM = 0;
+unsigned int WorldServer::CLEAR_PERM = 0;
+unsigned int WorldServer::CALL_PERM = 0;
+unsigned int WorldServer::HEAL_PERM = 0;
+unsigned int WorldServer::HIDE_PERM = 0;
+unsigned int WorldServer::MAXSTAT_PERM = 0;
+unsigned int WorldServer::MAXHAB_PERM = 0;
+unsigned int WorldServer::WHO_PERM = 0;
+unsigned int WorldServer::GUILDLVL_PERM = 0;
+unsigned int WorldServer::MSG_PERM = 0;
+unsigned int WorldServer::SAVE_PERM = 0;
+unsigned int WorldServer::A_LVL_PERM = 0;
+unsigned int WorldServer::A_EXP_PERM = 0;
+unsigned int WorldServer::A_GOLD_PERM = 0;
+unsigned int WorldServer::A_ITEM_PERM = 0;
+unsigned int WorldServer::A_GO_PERM = 0;
+unsigned int WorldServer::A_BUFF_PERM = 0;
+unsigned int WorldServer::A_REPAIR_PERM = 0;
+unsigned int WorldServer::A_HEAL_PERM = 0;
+unsigned int WorldServer::A_MAXSTAT_PERM = 0;
+unsigned int WorldServer::A_MAXHAB_PERM = 0;
+unsigned int WorldServer::A_GUILDLVL_PERM = 0;
+unsigned int WorldServer::A_SAVE_PERM = 0;
 
 bool WorldServer::gmCmd(Player* player, string command) {
     char* savePtr;

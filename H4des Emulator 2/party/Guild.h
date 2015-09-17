@@ -11,8 +11,6 @@
 #include <string>
 #include <vector>
 
-#include "../player/Player.h"
-
 using namespace std;
 
 class Player;
